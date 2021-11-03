@@ -1,16 +1,16 @@
 package com.vapp.admoblibrary.ads
 
 import android.app.Activity
+import android.graphics.Color
 import android.util.Log
-import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
 import com.ironsource.mediationsdk.ISBannerSize
 import com.ironsource.mediationsdk.IronSource
 import com.ironsource.mediationsdk.logger.IronSourceError
 import com.ironsource.mediationsdk.sdk.InterstitialListener
-import com.ironsource.mediationsdk.IronSourceBannerLayout
-
-
+import com.vapp.admoblibrary.utils.SweetAlert.SweetAlertDialog
 
 
 object IronSourceUtil {
@@ -18,9 +18,16 @@ object IronSourceUtil {
         IronSource.init(activity,appKey)
     }
     val TAG:String = "IronSourceUtil"
-    fun showInterstitialAdsWithCallback(adPlacementId:String, showLoadingDialog:Boolean, callback:AdCallback){
+    fun showInterstitialAdsWithCallback(activity: AppCompatActivity, adPlacementId:String, showLoadingDialog:Boolean, callback:AdCallback){
+        var dialog = SweetAlertDialog(activity, SweetAlertDialog.PROGRESS_TYPE)
+        dialog.getProgressHelper().barColor = Color.parseColor("#A5DC86")
+        dialog.setTitleText("Loading ads. Please wait...")
+        dialog.setCancelable(false)
         val mInterstitialListener = object : InterstitialListener {
             override fun onInterstitialAdReady() {
+                if(dialog.isShowing && activity.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)){
+                    dialog.dismiss()
+                }
                 IronSource.showInterstitial(adPlacementId)
                 IronSource.removeInterstitialListener()
             }
@@ -54,6 +61,9 @@ object IronSourceUtil {
         }
         else{
             IronSource.loadInterstitial()
+            if(dialog.isShowing && activity.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)){
+                dialog.show()
+            }
         }
         IronSource.setInterstitialListener(mInterstitialListener);
     }
