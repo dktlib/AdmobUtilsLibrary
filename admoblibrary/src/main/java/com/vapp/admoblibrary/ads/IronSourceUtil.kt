@@ -61,7 +61,7 @@ object IronSourceUtil {
         }
         else{
             IronSource.loadInterstitial()
-            if(dialog.isShowing && activity.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)){
+            if(activity.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)){
                 dialog.show()
             }
         }
