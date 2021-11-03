@@ -67,8 +67,8 @@ object IronSourceUtil {
         }
         IronSource.setInterstitialListener(mInterstitialListener);
     }
-    fun showBanner(activity:Activity, bannerContainer: ViewGroup, adPlacementId:String, bannerSize:ISBannerSize){
-        val banner = IronSource.createBanner(activity, bannerSize)
+    fun showBanner(activity:Activity, bannerContainer: ViewGroup, adPlacementId:String){
+        val banner = IronSource.createBanner(activity, ISBannerSize.SMART)
         bannerContainer.addView(banner)
         IronSource.loadBanner(banner,adPlacementId)
     }
