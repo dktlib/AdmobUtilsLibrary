@@ -210,6 +210,7 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
 
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+
     }
 
     @Override

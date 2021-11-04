@@ -7,11 +7,12 @@ import androidx.multidex.MultiDex;
 import com.vapp.admoblibrary.AdsMultiDexApplication;
 import com.vapp.admoblibrary.ads.AdmodUtils;
 import com.vapp.admoblibrary.ads.AppOpenManager;
+import com.vapp.admoblibrary.ads.IronSourceLifeCycleHelper;
 import com.vapp.admoblibrary.iap.PurchaseUtils;
 
 public class MyApplication extends AdsMultiDexApplication {
     boolean isShowAds = true;
-    boolean isShowAdsResume = true;
+    boolean isShowAdsResume = false;
 
     @Override
     public void onCreate() {
@@ -25,7 +26,6 @@ public class MyApplication extends AdsMultiDexApplication {
             isShowAds = true;
         }
         PurchaseUtils.getInstance().isPurchased(getString(R.string.product_id));
-
         AdmodUtils.getInstance().initAdmob(this, 10000,false, isShowAds);
         if (isShowAdsResume) {
             AppOpenManager.getInstance().init(this, getString(R.string.test_ads_admob_app_open));

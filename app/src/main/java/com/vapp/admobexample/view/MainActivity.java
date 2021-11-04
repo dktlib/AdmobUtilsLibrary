@@ -12,6 +12,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.vapp.admobexample.utilsdemp.UtilsDemoActivity;
+import com.vapp.admoblibrary.ads.IronSourceActivityLifeCycle;
+import com.vapp.admoblibrary.ads.IronSourceLifeCycleHelper;
+import com.vapp.admoblibrary.ads.IronSourceUtil;
 import com.vapp.admoblibrary.ads.NativeAdCallback;
 import com.vapp.admoblibrary.ads.admobnative.enumclass.GoogleEBanner;
 import com.vapp.admoblibrary.ads.admobnative.enumclass.GoogleENative;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_LoadAndShowInter;
     Button btn_LoadAndShowReward;
     Button btn_LoadNative, btn_LoadNativeGrid;
+    Button btnLoadInterIronSource;
     Button btn_IAP, btn_Rate, btn_Utils;
     LinearLayout nativeAds;
     LinearLayout banner;
@@ -45,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         finbyid();
         showDialogRate();
-
+        IronSourceUtil.INSTANCE.initIronSource(this,"85460dcd");
         // AdsConfigModel = Model call by API
 //         Utils.getInstance().adUnitLists = adsConfigModel.getAdUnitList();
 
@@ -58,7 +62,19 @@ public class MainActivity extends AppCompatActivity {
 //        }else{
 //            //dont show ads
 //        }
+        btnLoadInterIronSource.setOnClickListener(view -> {
+            IronSourceUtil.INSTANCE.showInterstitialAdsWithCallback(this, "", true, new AdCallback() {
+                @Override
+                public void onAdClosed() {
+                    startActivity(new Intent(MainActivity.this,OtherActivity.class));
+                }
 
+                @Override
+                public void onAdFail() {
+                    onAdClosed();
+                }
+            });
+        });
         btn_Utils.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -229,6 +245,7 @@ public class MainActivity extends AppCompatActivity {
         btn_IAP = findViewById(R.id.btn_IAP);
         btn_Rate = findViewById(R.id.btn_Rate);
         btn_LoadNativeGrid = findViewById(R.id.btn_LoadNativeGrid);
+        btnLoadInterIronSource = findViewById(R.id.btn_LoadAndShowInterIronSource);
     }
 
     @Override

@@ -133,6 +133,12 @@
                 android:orientation="vertical"
                 android:layout_marginTop="0dp"/>
 
+            <Button
+                android:id="@+id/btn_LoadAndShowInterIronSource"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LoadAndShowInterIronSource"
+                android:layout_marginTop="5dp"/>
 
 
         </LinearLayout>
