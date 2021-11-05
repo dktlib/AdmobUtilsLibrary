@@ -151,7 +151,7 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
 
     public void fetchAd(final boolean isSplash) {
         Log.d(TAG, "fetchAd: isSplash = " + isSplash);
-        if (isAdAvailable(isSplash)) {
+        if (isAdAvailable(isSplash)||appResumeAdId==null) {
             return;
         }
         loadCallback =
@@ -309,10 +309,11 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
                         if (currentActivity != null)
                             splashAd.show(currentActivity);
                     } else {
-                        if (appResumeAd != null)
+                        if (appResumeAd != null){
                             appResumeAd.setFullScreenContentCallback(callback);
-                        if (currentActivity != null)
-                            appResumeAd.show(currentActivity);
+                            if (currentActivity != null)
+                                appResumeAd.show(currentActivity);
+                        }
                     }
                 }
             }, 100);
