@@ -10,6 +10,7 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import com.ironsource.mediationsdk.ISBannerSize
 import com.ironsource.mediationsdk.IronSource
+import com.ironsource.mediationsdk.integration.IntegrationHelper
 import com.ironsource.mediationsdk.logger.IronSourceError
 import com.ironsource.mediationsdk.sdk.InterstitialListener
 import com.vapp.admoblibrary.utils.SweetAlert.SweetAlertDialog
@@ -19,7 +20,9 @@ object IronSourceUtil : LifecycleObserver {
     fun initIronSource(activity: Activity, appKey: String) {
         IronSource.init(activity, appKey)
     }
-
+    fun validateIntegration(activity:Activity){
+        IntegrationHelper.validateIntegration(activity);
+    }
     val TAG: String = "IronSourceUtil"
     fun showInterstitialAdsWithCallback(
         activity: AppCompatActivity,

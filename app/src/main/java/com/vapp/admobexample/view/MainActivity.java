@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         finbyid();
         showDialogRate();
         IronSourceUtil.INSTANCE.initIronSource(this,"85460dcd");
+        IronSourceUtil.INSTANCE.validateIntegration(this);
         // AdsConfigModel = Model call by API
 //         Utils.getInstance().adUnitLists = adsConfigModel.getAdUnitList();
 

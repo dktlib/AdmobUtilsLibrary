@@ -42,7 +42,10 @@ android {
 
 dependencies {
 
+    implementation fileTree(include: ['*.aar'], dir: 'libs')
     implementation 'org.jetbrains:annotations:15.0'
+//    implementation files('C:/Users/NAMDH/Downloads/admobadapter-4.3.23.aar')
+//    implementation files('C:/Users/NAMDH/Downloads/facebookadapter-4.3.32.aar')
     def lifecycle_version = "2.0.0"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
@@ -66,6 +69,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.pnikosis:materialish-progress:1.7'
     implementation 'com.ironsource.sdk:mediationsdk:7.1.12'
+    implementation 'com.facebook.android:audience-network-sdk:6.8.0'
+    implementation 'com.unity3d.ads:unity-ads:3.7.5'
 }
 repositories {
     mavenCentral()
