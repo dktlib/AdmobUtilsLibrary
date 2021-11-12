@@ -68,6 +68,8 @@
             android:layout_marginRight="@dimen/_10sdp"
             android:maxLength="500"
             android:textColor="@color/gnt_black"
+            android:backgroundTint="@color/gnt_black"
+            android:textColorHint="@color/gnt_gray"
             android:hint="(Optional) Tell others what you think"/>
 
         <LinearLayout
