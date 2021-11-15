@@ -57,8 +57,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.google.android.gms:play-services-ads:20.2.0'
-    implementation "com.android.billingclient:billing:4.0.0"
-    implementation 'com.anjlab.android.iab.v3:library:1.0.44'
     implementation "androidx.multidex:multidex:2.0.1"
     implementation "androidx.core:core-ktx:+"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0"
@@ -71,6 +69,8 @@ dependencies {
     implementation 'com.ironsource.sdk:mediationsdk:7.1.12'
     implementation 'com.facebook.android:audience-network-sdk:6.8.0'
     implementation 'com.unity3d.ads:unity-ads:3.7.5'
+    //IAP
+    implementation("com.android.billingclient:billing-ktx:4.0.0")
 }
 repositories {
     mavenCentral()

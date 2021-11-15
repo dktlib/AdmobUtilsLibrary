@@ -155,9 +155,9 @@ public class AdmodUtils {
         //Samsung SM-G610F
         testDevices.add("2B018C52668CBA0B033F411955A5B561");
         //Realme RMX1851
-        testDevices.add("39D7026016640CEA1502836C6EF3776D");
+        testDevices.add("93FDD4806D8BBC286B642D94357B7D01");
         //Redmi 5 Plus
-        testDevices.add("CE604BDCEFEE2B9125CCFFC53E96022E");
+        testDevices.add("FC213DE0DBCA10DD105F96CE6C6577EF");
         //Redmi 9A
         testDevices.add("13D67F452A299DB825A348917D52D640");
         //POCO X3
@@ -167,7 +167,7 @@ public class AdmodUtils {
         //Oppo CPH1825
         testDevices.add("805702C1D9D4FD957AFE14F3D69E79F7");
         //Xiaomi Redmi Note 7
-        testDevices.add("9C62AAC36B9F23413AF4D66FE48F9E9B");
+        testDevices.add("F89BA5C88BAE89F16B035AB4D9E0E647");
 
     }
 

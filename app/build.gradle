@@ -7,6 +7,9 @@ android {
     compileSdkVersion 31
     buildToolsVersion "30.0.2"
 
+    dataBinding {
+        enabled = true
+    }
     defaultConfig {
         applicationId "com.screenrecorder.videorecorder.free.lite"
         minSdkVersion 19
@@ -50,6 +53,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation 'com.android.billingclient:billing-ktx:4.0.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

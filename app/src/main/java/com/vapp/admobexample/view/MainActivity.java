@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.vapp.admobexample.iap.IAPKotlinActivity;
 import com.vapp.admobexample.utilsdemp.UtilsDemoActivity;
 import com.vapp.admoblibrary.ads.IronSourceActivityLifeCycle;
 import com.vapp.admoblibrary.ads.IronSourceLifeCycleHelper;
@@ -172,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
         btn_IAP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.getInstance().addActivity(MainActivity.this, IAPActivity.class);
+                Utils.getInstance().addActivity(MainActivity.this, IAPKotlinActivity.class);
             }
         });
         btn_Rate.setOnClickListener(new View.OnClickListener() {
