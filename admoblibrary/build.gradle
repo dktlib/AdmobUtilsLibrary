@@ -57,7 +57,7 @@ dependencies {
     implementation "com.android.billingclient:billing:4.0.0"
     implementation 'com.anjlab.android.iab.v3:library:2.0.0'
     implementation "androidx.multidex:multidex:2.0.1"
-    implementation "androidx.core:core-ktx:+"
+    implementation "androidx.core:core-ktx:1.6.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.0.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.github.ome450901:SimpleRatingBar:1.5.1'

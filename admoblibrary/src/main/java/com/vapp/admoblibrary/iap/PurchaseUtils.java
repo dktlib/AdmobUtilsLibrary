@@ -14,10 +14,10 @@ import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
+
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.PurchaseInfo;
 import com.anjlab.android.iab.v3.SkuDetails;
-
 import com.vapp.admoblibrary.R;
 import com.vapp.admoblibrary.utils.Utils;
 
@@ -38,7 +38,7 @@ public class PurchaseUtils {
     }
 
     public void initBilling(Context context, String play_console_license) {
-            bp = new BillingProcessor(context, play_console_license, new BillingProcessor.IBillingHandler() {
+            bp =BillingProcessor.newBillingProcessor(context, play_console_license, new BillingProcessor.IBillingHandler() {
                 @Override
                 public void onProductPurchased(@NonNull String productId, @Nullable PurchaseInfo details) {
 

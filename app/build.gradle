@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId "com.screenrecorder.videorecorder.free.lite"
         minSdkVersion 19
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 8
         versionName "1.0"
         multiDexEnabled true

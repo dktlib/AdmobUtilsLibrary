@@ -2,32 +2,25 @@ package com.vapp.admobexample.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.vapp.admobexample.utilsdemp.UtilsDemoActivity;
-import com.vapp.admoblibrary.ads.NativeAdCallback;
-import com.vapp.admoblibrary.ads.admobnative.enumclass.GoogleEBanner;
-import com.vapp.admoblibrary.ads.admobnative.enumclass.GoogleENative;
 import com.vapp.admobexample.R;
 import com.vapp.admobexample.iap.IAPActivity;
+import com.vapp.admobexample.utilsdemp.UtilsDemoActivity;
+import com.vapp.admoblibrary.ads.AdCallback;
+import com.vapp.admoblibrary.ads.AdmodUtils;
+import com.vapp.admoblibrary.ads.NativeAdCallback;
+import com.vapp.admoblibrary.ads.RewardAdCallback;
+import com.vapp.admoblibrary.ads.admobnative.enumclass.GoogleEBanner;
+import com.vapp.admoblibrary.ads.admobnative.enumclass.GoogleENative;
 import com.vapp.admoblibrary.ads.model.AdUnitListModel;
-import com.vapp.admoblibrary.ads.model.AdsConfigModel;
 import com.vapp.admoblibrary.rate.MaybeLaterCallback;
 import com.vapp.admoblibrary.rate.RatingDialog;
 import com.vapp.admoblibrary.utils.Utils;
-import com.vapp.admoblibrary.ads.AdCallback;
-import com.vapp.admoblibrary.ads.AdmodUtils;
-import com.vapp.admoblibrary.ads.RewardAdCallback;
-
-import java.util.Calendar;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     Button btn_LoadInter;
