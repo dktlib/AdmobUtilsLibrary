@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.ProcessLifecycleOwner;
 
-import com.vapp.admoblibrary.BuildConfig;
 import com.vapp.admoblibrary.ads.admobnative.enumclass.GoogleEBanner;
 import com.vapp.admoblibrary.ads.admobnative.enumclass.GoogleENative;
 import com.google.android.gms.ads.AdError;
@@ -679,20 +678,9 @@ public class AdmodUtils {
     }
 
 
-    boolean isClicked = false;
 
     public void loadAndShowAdInterstitialWithCallback(Activity activity
             , String admobId, int limitTime, AdCallback adCallback, boolean enableLoadingDialog) {
-        if (isClicked)
-            return;
-
-        isClicked = true;
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                isClicked = false;
-            }
-        }, 2500);
 
         Handler handlerTimeOut = new Handler();
         handlerTimeOut.postDelayed(new Runnable() {

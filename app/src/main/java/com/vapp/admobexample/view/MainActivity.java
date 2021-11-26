@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 //        AdmodUtils.getInstance().loadNativeAdsWithLayout(MainActivity.this, getString(R.string.test_ads_admob_native_id), nativeAds, R.layout.ad_unified_medium);
-        AdmodUtils.getInstance().loadNativeAds(MainActivity.this, getString(R.string.test_ads_admob_native_id), nativeAds, GoogleENative.UNIFIED_SMALL, new NativeAdCallback() {
+        AdmodUtils.getInstance().loadNativeAds(MainActivity.this, getString(R.string.test_ads_admob_native_id), nativeAds, GoogleENative.UNIFIED_MEDIUM, new NativeAdCallback() {
             @Override
             public void onNativeAdLoaded() {
 
