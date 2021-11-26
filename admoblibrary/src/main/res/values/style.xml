@@ -54,13 +54,15 @@
     <style name="AdAttribution">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">left</item>
+        <item name="android:gravity">center</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:textSize">12sp</item>
         <item name="android:text">@string/ad_attribution</item>
         <item name="android:background">#FFCC66</item>
-        <item name="android:width">15dp</item>
-        <item name="android:height">15dp</item>
+        <item name="android:layout_centerInParent">true</item>
+
+        <item name="android:width">25dp</item>
+        <item name="android:height">25dp</item>
     </style>
 
 </resources>
