@@ -340,16 +340,6 @@ public class AdmodUtils {
 
     public void loadAndShowAdRewardWithCallback(Activity activity, String admobId, RewardAdCallback adCallback2, boolean enableLoadingDialog) {
 
-        if (isClicked)
-            return;
-        isClicked = true;
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                isClicked = false;
-            }
-        }, 3500);
-
         Handler handlerTimeOut = new Handler();
         handlerTimeOut.postDelayed(new Runnable() {
             public void run() {
