@@ -230,7 +230,9 @@ public class AdmodUtils {
             }
         });
 
-        mAdView.loadAd(adRequest);
+        if(adRequest!=null){
+            mAdView.loadAd(adRequest);
+        }
         Log.e(" Admod", "loadAdBanner");
     }
 
@@ -273,7 +275,9 @@ public class AdmodUtils {
                 })
                 .withNativeAdOptions(new NativeAdOptions.Builder().build()).build();
 
-        adLoader.loadAd(adRequest);
+        if(adRequest!=null){
+            adLoader.loadAd(adRequest);
+        }
         Log.e("Admod", "loadAdNativeAds");
     }
 
@@ -325,7 +329,9 @@ public class AdmodUtils {
                 })
                 .withNativeAdOptions(new NativeAdOptions.Builder().build()).build();
 
-        adLoader.loadAd(adRequest);
+        if(adRequest!=null){
+            adLoader.loadAd(adRequest);
+        }
         Log.e("Admod", "loadAdNativeAds");
     }
 
