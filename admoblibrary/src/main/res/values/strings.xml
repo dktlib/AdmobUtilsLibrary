@@ -18,4 +18,5 @@
     <string name="dialog_cancel">Cancel</string>
     <string name="LOADING">Loading...</string>
 
+    <string name="ad_attribution">Ad</string>
 </resources>
