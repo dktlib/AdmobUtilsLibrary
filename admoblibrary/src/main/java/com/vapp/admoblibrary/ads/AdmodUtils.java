@@ -58,7 +58,7 @@ import java.util.List;
 
 
 public class AdmodUtils {
-    SweetAlertDialog dialog;
+    public SweetAlertDialog dialog;
     public long lastTimeShowInterstitial = 0;
     public long timeOut = 0;
     public boolean isAdShowing = false;
@@ -337,7 +337,7 @@ public class AdmodUtils {
 
 
     //reward
-    RewardedAd mRewardedAd = null;
+    public RewardedAd mRewardedAd = null;
 
     public void loadAndShowAdRewardWithCallback(Activity activity, String admobId, RewardAdCallback adCallback2, boolean enableLoadingDialog) {
 
@@ -510,7 +510,10 @@ public class AdmodUtils {
 
 
     }
-
+    public void dismissAdDialog(){
+        if(AdmodUtils.getInstance().dialog != null && AdmodUtils.getInstance().dialog.isShowing())
+            AdmodUtils.getInstance().dialog.dismiss();
+    }
     //inter ads
     public InterstitialAd mInterstitialAd;
 
