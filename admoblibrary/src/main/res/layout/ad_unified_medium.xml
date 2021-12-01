@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ad_container"
         android:layout_width="match_parent"
-        android:layout_height="340dp"
+        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:minHeight="50dp">
 
@@ -21,6 +21,7 @@
             android:layout_gravity="fill"
             app:layout_constraintBottom_toTopOf="@+id/middle"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/ad_media"
             app:layout_constraintBottom_toTopOf="@+id/ad_call_to_action"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -76,11 +78,14 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:text="Test Ads"
-                android:maxLines="1"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+
+                android:maxLines="2"
                 android:ellipsize="end"
                 android:textSize="16sp"
                 android:textColor="@color/gnt_black"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/textView2"
                 app:layout_constraintStart_toEndOf="@+id/cardIcon"
                 app:layout_constraintTop_toTopOf="parent"
@@ -112,7 +117,8 @@
                 android:layout_marginBottom="4dp"
                 android:text="Test Ads to you"
                 android:textColor="@color/gnt_black"
-                android:maxLines="1"
+                android:maxLines="2"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
                 android:ellipsize="end"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -135,6 +141,7 @@
             android:textStyle="bold"
             android:background="@color/gnt_blue"
             android:stateListAnimator="@null"
+            app:layout_constraintTop_toBottomOf="@+id/middle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
