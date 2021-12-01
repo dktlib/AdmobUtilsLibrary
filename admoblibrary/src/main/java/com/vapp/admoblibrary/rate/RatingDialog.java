@@ -60,7 +60,7 @@ public class RatingDialog extends AppCompatDialog implements RatingBar.OnRatingB
     public int starnumber = 0;
 
     public RatingDialog(Activity context, Builder builder) {
-        super(context);
+        super(context,R.style.AppCompatAlertDialogStyle);
         this.context = context;
         this.builder = builder;
 

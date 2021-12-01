@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/NAMDH/Desktop/phong/AdmobUtilsLibrary/admoblibrary/src/main/res/layout/ad_unified_medium.xml" value="0.33" />
+        <entry key="..\:/Users/NAMDH/Desktop/phong/AdmobUtilsLibrary/admoblibrary/src/main/res/layout/ad_unified_small.xml" value="0.33" />
+        <entry key="..\:/Users/NAMDH/Desktop/phong/AdmobUtilsLibrary/admoblibrary/src/main/res/layout/dialog_feedback.xml" value="0.12037037037037036" />
         <entry key="..\:/library/admob_library_new/admoblibrary/src/main/res/drawable/blue_button_background.xml" value="0.22135416666666666" />
         <entry key="..\:/library/admob_library_new/admoblibrary/src/main/res/layout/alert_dialog.xml" value="0.20520833333333333" />
         <entry key="..\:/library/admob_library_new/admoblibrary/src/main/res/layout/item_admob_native_ad.xml" value="0.36666666666666664" />

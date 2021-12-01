@@ -311,7 +311,7 @@ public class AdmodUtils {
                         }
 
                         NativeAdView adView = (NativeAdView) activity.getLayoutInflater()
-                                .inflate(id, null);
+                                . inflate(id, null);
 
                         NativeFunc.Companion.populateNativeAdView(nativeAd, adView);
 
