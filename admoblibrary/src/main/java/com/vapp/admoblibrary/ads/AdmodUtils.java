@@ -673,12 +673,6 @@ public class AdmodUtils {
             public void onAdLoaded(@NonNull @org.jetbrains.annotations.NotNull InterstitialAd interstitialAd) {
                 super.onAdLoaded(interstitialAd);
                 mInterstitialAd = interstitialAd;
-
-                if (AppOpenManager.getInstance().isInitialized()) {
-                    if (AppOpenManager.getInstance().isAppResumeEnabled) {
-                        return;
-                    }
-                }
                 if (mInterstitialAd != null) {
                     mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
                         @Override
