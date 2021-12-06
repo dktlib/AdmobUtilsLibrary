@@ -8,7 +8,9 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.Handler;
 import android.provider.Settings;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -178,7 +180,7 @@ public class AdmodUtils {
     }
 
 
-    public void loadAdBanner(Context context, String bannerId, ViewGroup viewGroup, GoogleEBanner size) {
+    public void loadAdBanner(Activity context, String bannerId, ViewGroup viewGroup) {
 
         if (!isShowAds) {
             viewGroup.setVisibility(View.GONE);
@@ -190,16 +192,18 @@ public class AdmodUtils {
             bannerId = context.getString(R.string.test_ads_admob_banner_id);
         }
         mAdView.setAdUnitId(bannerId);
-        if (size == GoogleEBanner.SIZE_SMALL) {
-            mAdView.setAdSize(AdSize.BANNER);
-        } else if (size == GoogleEBanner.SIZE_MEDIUM) {
-            mAdView.setAdSize(AdSize.LARGE_BANNER);
-        } else if (size == GoogleEBanner.SIZE_FULL) {
-            mAdView.setAdSize(AdSize.FULL_BANNER);
-        } else {
-            mAdView.setAdSize(AdSize.SMART_BANNER);
-        }
+//        if (size == GoogleEBanner.SIZE_SMALL) {
+//            mAdView.setAdSize(AdSize.BANNER);
+//        } else if (size == GoogleEBanner.SIZE_MEDIUM) {
+//            mAdView.setAdSize(AdSize.LARGE_BANNER);
+//        } else if (size == GoogleEBanner.SIZE_FULL) {
+//            mAdView.setAdSize(AdSize.FULL_BANNER);
+//        } else {
+//            mAdView.setAdSize(AdSize.SMART_BANNER);
+//        }
+        AdSize adSize = getAdSize(context);
 
+        mAdView.setAdSize(adSize);
         viewGroup.removeAllViews();
         viewGroup.addView(mAdView);
 
@@ -235,7 +239,17 @@ public class AdmodUtils {
         }
         Log.e(" Admod", "loadAdBanner");
     }
-
+    private AdSize getAdSize(Activity context) {
+        // Step 2 - Determine the screen width (less decorations) to use for the ad width.
+        Display display = context.getWindowManager().getDefaultDisplay();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        display.getMetrics(outMetrics);
+        float widthPixels = outMetrics.widthPixels;
+        float density = outMetrics.density;
+        int adWidth = (int) (widthPixels / density);
+        // Step 3 - Get adaptive ad size and return for setting on the ad view.
+        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(context, adWidth);
+    }
     // ads native
     public void loadNativeAdsWithLayout(Activity activity, String s, ViewGroup viewGroup, int layout, NativeAdCallback adCallback) {
 

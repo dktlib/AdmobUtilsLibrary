@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        AdmodUtils.getInstance().loadAdBanner(MainActivity.this, getString(R.string.test_ads_admob_native_id), banner, GoogleEBanner.SIZE_SMALL);
+        AdmodUtils.getInstance().loadAdBanner(MainActivity.this, getString(R.string.test_ads_admob_native_id), banner);
     }
 
     private void showDialogRate() {
