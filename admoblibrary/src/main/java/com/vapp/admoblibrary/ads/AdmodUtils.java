@@ -682,7 +682,7 @@ public class AdmodUtils {
                             if (AppOpenManager.getInstance().isInitialized()) {
                                 AppOpenManager.getInstance().isAppResumeEnabled = true;
                             }
-                            AdmodUtils.getInstance().isShowAds = false;
+                            AdmodUtils.getInstance().isAdShowing = false;
                             if(AdmodUtils.getInstance().mInterstitialAd != null){
                                 AdmodUtils.getInstance().mInterstitialAd = null;}
                             Log.e("Admodfail", "onAdFailedToLoad" + adError.getMessage());
