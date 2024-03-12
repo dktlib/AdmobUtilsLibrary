@@ -268,8 +268,7 @@ object AdmobUtils {
             }
 
             override fun onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
+
             }
         }
         val extras = Bundle()
@@ -286,49 +285,30 @@ object AdmobUtils {
     }
 
     @JvmStatic
-    fun loadAndShowBannerRemote(
+    fun loadAndShowBannerCollapsibleWithConfig(
         activity: Activity,
-        bannerHolder: BannerHolder,
-        bannerConfig: BannerPlugin.BannerConfig?,
-        view: ViewGroup,
-        line: View
+        id: String,refreshRateSec : Int,view: ViewGroup,
+        bannerAdCallback: BannerCollapsibleAdCallback
     ) {
         var bannerPlugin: BannerPlugin? = null
-        Log.d("===Banner", "Banner1")
+        val bannerConfig = BannerPlugin.BannerConfig(id,"collapsible_bottom",refreshRateSec,0)
+        bannerPlugin = bannerConfig.adUnitId?.let {
+            BannerPlugin(
+                activity, view, it, bannerConfig, object : BannerRemoteConfig {
+                    override fun onBannerAdLoaded(adSize: AdSize?) {
+                        adSize?.let { it1 -> bannerAdCallback.onBannerAdLoaded(it1) }
+                    }
 
-        bannerPlugin = BannerPlugin(
-            activity, view, bannerHolder.ads, bannerConfig, object : BannerRemoteConfig {
-                override fun onBannerAdLoaded(adSize: AdSize?) {
-                    view.visibility = View.VISIBLE
-                    line.visibility = View.VISIBLE
-                }
+                    override fun onAdFail() {
+                        Log.d("===Banner", "Banner2")
+                        bannerAdCallback.onAdFail("Banner Failed")
+                    }
 
-                override fun onAdFail() {
-                    Log.d("===Banner", "Banner2")
-                    bannerPlugin = BannerPlugin(activity,
-                        view,
-                        bannerHolder.ads2,
-                        bannerConfig,
-                        object : BannerRemoteConfig {
-                            override fun onBannerAdLoaded(adSize: AdSize?) {
-                                view.visibility = View.VISIBLE
-                                line.visibility = View.VISIBLE
-                            }
-
-                            override fun onAdFail() {
-                                view.visibility = View.GONE
-                                line.visibility = View.GONE
-                            }
-
-                            override fun onAdPaid(adValue: AdValue, mAdView: AdView) {
-                            }
-                        })
-                }
-
-                override fun onAdPaid(adValue: AdValue, mAdView: AdView) {
-
-                }
-            })
+                    override fun onAdPaid(adValue: AdValue, mAdView: AdView) {
+                        bannerAdCallback.onAdPaid(adValue,mAdView)
+                    }
+                })
+        }
     }
 
     @JvmStatic

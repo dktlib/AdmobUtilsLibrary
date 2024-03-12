@@ -3,6 +3,7 @@ package com.vapp.admobexample.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -10,12 +11,14 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.codemybrainsout.ratingdialog.MaybeLaterCallback;
 import com.codemybrainsout.ratingdialog.RatingDialog;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdValue;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.nativead.NativeAd;
 import com.vapp.admobexample.utilsdemp.AdsManager;
 import com.vapp.admoblibrary.AdsInterCallBack;
@@ -296,9 +299,30 @@ public class MainActivity extends AppCompatActivity {
                 AdsManager.INSTANCE.showAdNativeMedium(MainActivity.this,viewNativeAds,AdsManager.INSTANCE.getNativeHolder());
             }
         });
-        AdsManager.showAdBanner(this,"", findViewById(R.id.banner),findViewById(R.id.line));
+//        AdsManager.showAdBanner(this,"", findViewById(R.id.banner),findViewById(R.id.line));
 //        AdsManager.showAdBannerCollapsible(this,"", findViewById(R.id.banner),findViewById(R.id.line));
-//        AdmodUtils.loadAndShowBannerRemote(this,"","", RemoteConfigManager.INSTANCE.getBannerConfig("test_banner_2"), findViewById(R.id.banner),findViewById(R.id.line));
+        AdmobUtils.loadAndShowBannerCollapsibleWithConfig(this, "", 5, findViewById(R.id.banner), new AdmobUtils.BannerCollapsibleAdCallback() {
+            @Override
+            public void onClickAds() {
+
+            }
+
+            @Override
+            public void onBannerAdLoaded(@NonNull AdSize adSize) {
+                Log.d("===Banner","onBannerAdLoaded");
+                Toast.makeText(MainActivity.this,"onBannerAdLoaded",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdFail(@NonNull String message) {
+
+            }
+
+            @Override
+            public void onAdPaid(@NonNull AdValue adValue, @NonNull AdView mAdView) {
+
+            }
+        });
     }
     private void showDialogRate() {
         RatingDialog ratingDialog = new RatingDialog.Builder(this)

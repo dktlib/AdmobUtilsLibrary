@@ -74,6 +74,7 @@ internal abstract class BaseAdView(
         val delay = max(0L, nextRefreshTime - System.currentTimeMillis())
 
         stopBannerRefreshScheduleIfNeed()
+        //Check size FrameLayout
         log("Ads are scheduled to show in $delay mils")
         refreshHandler.postDelayed({ loadAd() }, delay)
     }
