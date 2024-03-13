@@ -52,6 +52,7 @@ class AOAManager(private val activity: Activity,val appOpen: String,val timeOut:
             if (isLoading && isStart) {
                 isStart = false
                 isLoading = false
+                onAoaDestroyed()
                 appOpenAdsListener.onAdsFailed("Time out")
                 Log.d("====Timeout", "TimeOut")
             }
