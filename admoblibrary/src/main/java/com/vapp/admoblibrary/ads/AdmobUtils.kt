@@ -233,7 +233,7 @@ object AdmobUtils {
         }
         val mAdView = AdView(activity)
         if (isTesting) {
-            bannerId = activity.getString(R.string.test_ads_admob_banner_id)
+            bannerId = activity.getString(R.string.test_ads_admob_banner_collapsible_id)
         }
         mAdView.adUnitId = bannerId!!
         viewGroup.removeAllViews()

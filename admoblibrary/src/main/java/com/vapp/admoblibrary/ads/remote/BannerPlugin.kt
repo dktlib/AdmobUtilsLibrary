@@ -96,7 +96,7 @@ class BannerPlugin(
         var refreshRateSec: Int? = config.defaultRefreshRateSec
 
         if (AdmobUtils.isTesting) {
-            adUnitId = activity.getString(R.string.test_ads_admob_banner_id)
+            adUnitId = activity.getString(R.string.test_ads_admob_banner_collapsible_id)
         }
         bannerType = when (bannerConfig?.type) {
             TYPE_STANDARD -> BannerType.Standard
@@ -111,7 +111,7 @@ class BannerPlugin(
         log("\n adUnitId = $adUnitId \n bannerType = $bannerType \n refreshRateSec = $refreshRateSec \n cbFetchIntervalSec = $cbFetchIntervalSec")
 
         adView = BaseAdView.Factory.getAdView(
-            activity,
+                                           activity,
             adUnitId,
             bannerType,
             refreshRateSec,

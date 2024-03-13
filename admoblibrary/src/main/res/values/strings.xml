@@ -6,6 +6,7 @@
     <string name="test_ads_admob_native_full_screen_id" translatable="false">ca-app-pub-3940256099942544/7342230711</string>
     <string name="test_ads_admob_inter_reward_id" translatable="false">ca-app-pub-3940256099942544/5354046379</string>
     <string name="test_ads_admob_banner_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="test_ads_admob_banner_collapsible_id" translatable="false">ca-app-pub-3940256099942544/2014213617</string>
     <string name="test_ads_admob_reward_id" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
 
     <string name="rating_dialog_experience">We are working hard for a better user eperience.</string>
