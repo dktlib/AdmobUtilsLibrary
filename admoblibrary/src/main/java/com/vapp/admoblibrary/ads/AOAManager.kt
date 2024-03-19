@@ -65,7 +65,7 @@ class AOAManager(private val activity: Activity,val appOpen: String,val timeOut:
             Log.d("====Timeout", "fetching... ")
             isShowingAd = false
             val request = adRequest
-            AppOpenAd.load(activity, idAoa, request, AppOpenAd.APP_OPEN_AD_ORIENTATION_PORTRAIT, object : AppOpenAd.AppOpenAdLoadCallback() {
+            AppOpenAd.load(activity, idAoa, request, object : AppOpenAd.AppOpenAdLoadCallback() {
                 override fun onAdFailedToLoad(p0: LoadAdError) {
                     isLoading = false
                     super.onAdFailedToLoad(p0)

@@ -40,7 +40,8 @@ object AdsManager {
     var check_inter1 = false
 
     var nativeHolder = NativeHolder("")
-    var bannerHolder = BannerHolder("", "")
+    var bannerHolder = BannerHolder("")
+    var bannerHolder_other = BannerHolder("")
     var aoaHolder = AppOpenAppHolder("", "")
     var interholder = InterHolder("")
     var interRewardHolder = RewardedInterstitialHolder("")
@@ -279,9 +280,9 @@ object AdsManager {
     }
 
     @JvmStatic
-    fun showAdBannerCollapsible(activity: Activity, bannerHolder: String, view: ViewGroup, line: View) {
+    fun showAdBannerCollapsible(activity: Activity, bannerHolder: BannerHolder, view: ViewGroup, line: View) {
         if (AdmobUtils.isNetworkConnected(activity)) {
-            AdmobUtils.loadAdBannerCollapsible(
+            AdmobUtils.loadAdBannerCollapsibleReload(
                 activity,
                 bannerHolder,
                 CollapsibleBanner.BOTTOM,

@@ -6,16 +6,9 @@ import com.codemybrainsout.ratingdialog.RatingDialog
 import com.vapp.admobexample.R
 import com.vapp.admobexample.databinding.ActivityOtherBinding
 import com.vapp.admobexample.utilsdemp.AdsManager
-import com.vapp.admobexample.utilsdemp.AdsManager.loadAndShowNative
-import com.vapp.admobexample.utilsdemp.AdsManager.loadAndShowNativeFullScreen
 import com.vapp.admobexample.utilsdemp.AdsManager.nativeHolder
-import com.vapp.admobexample.utilsdemp.AdsManager.showAdBanner
 import com.vapp.admobexample.utilsdemp.AdsManager.showAdBannerCollapsible
 import com.vapp.admoblibrary.utils.Utils
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class OtherActivity : AppCompatActivity() {
     var binding: ActivityOtherBinding? = null
@@ -24,7 +17,9 @@ class OtherActivity : AppCompatActivity() {
         binding = ActivityOtherBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
         setResult(5)
-        AdsManager.loadAndShowNativeFullScreen(this,binding!!.nativeAds,nativeHolder)
+        //        AdsManager.showAdBanner(this,"", findViewById(R.id.banner),findViewById(R.id.line));
+        showAdBannerCollapsible(this, AdsManager.bannerHolder_other, findViewById(R.id.banner), findViewById(R.id.line))
+//        AdsManager.loadAndShowNativeFullScreen(this,binding!!.nativeAds,nativeHolder)
         //        if (AdmodUtils.getInstance().dialog != null) {
 //            if (AdmodUtils.getInstance().dialog.isShowing()) {
 //                AdmodUtils.getInstance().dialog.dismiss();

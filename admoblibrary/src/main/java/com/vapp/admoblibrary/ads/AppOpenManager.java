@@ -12,8 +12,11 @@ import android.util.Log;
 import android.view.Window;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ProcessLifecycleOwner;
 
@@ -29,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AppOpenManager implements Application.ActivityLifecycleCallbacks, LifecycleObserver {
+public class AppOpenManager implements Application.ActivityLifecycleCallbacks, DefaultLifecycleObserver {
     private static final String TAG = "AppOpenManager";
     private static volatile AppOpenManager INSTANCE;
     private AppOpenAd appResumeAd = null;
@@ -187,8 +190,7 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
 
                     };
             AppOpenAd.load(
-                    myApplication, appResumeAdId, adRequest,
-                    AppOpenAd.APP_OPEN_AD_ORIENTATION_PORTRAIT, loadCallback);
+                    myApplication, appResumeAdId, adRequest, loadCallback);
         }
 
     }
@@ -349,9 +351,9 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
         }
     }
 
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    public void onResume() {
+    @Override
+    public void onStart(@NonNull LifecycleOwner owner) {
+        DefaultLifecycleObserver.super.onStart(owner);
         Log.d("===Onresume", "onresume");
         if (currentActivity == null) {
             return;
@@ -379,6 +381,11 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
         }
         showAdIfAvailable(false);
     }
+
+//    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+//    public void onResume() {
+//
+//    }
 
     public void showDialog(Context context){
         isShowingAdsOnResume = true;

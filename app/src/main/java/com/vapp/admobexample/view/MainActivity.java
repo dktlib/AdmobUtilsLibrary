@@ -300,29 +300,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 //        AdsManager.showAdBanner(this,"", findViewById(R.id.banner),findViewById(R.id.line));
-//        AdsManager.showAdBannerCollapsible(this,"", findViewById(R.id.banner),findViewById(R.id.line));
-        AdmobUtils.loadAndShowBannerCollapsibleWithConfig(this, "", 5, findViewById(R.id.banner), new AdmobUtils.BannerCollapsibleAdCallback() {
-            @Override
-            public void onClickAds() {
 
-            }
-
-            @Override
-            public void onBannerAdLoaded(@NonNull AdSize adSize) {
-                Log.d("===Banner","onBannerAdLoaded");
-                Toast.makeText(MainActivity.this,"onBannerAdLoaded",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onAdFail(@NonNull String message) {
-
-            }
-
-            @Override
-            public void onAdPaid(@NonNull AdValue adValue, @NonNull AdView mAdView) {
-
-            }
-        });
+//        AdmobUtils.loadAndShowBannerCollapsibleWithConfig(this, "", 5, findViewById(R.id.banner), new AdmobUtils.BannerCollapsibleAdCallback() {
+//            @Override
+//            public void onClickAds() {
+//
+//            }
+//
+//            @Override
+//            public void onBannerAdLoaded(@NonNull AdSize adSize) {
+//                Log.d("===Banner","onBannerAdLoaded");
+//                Toast.makeText(MainActivity.this,"onBannerAdLoaded",Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onAdFail(@NonNull String message) {
+//
+//            }
+//
+//            @Override
+//            public void onAdPaid(@NonNull AdValue adValue, @NonNull AdView mAdView) {
+//
+//            }
+//        });
     }
     private void showDialogRate() {
         RatingDialog ratingDialog = new RatingDialog.Builder(this)
@@ -389,5 +389,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         AppOpenManager.getInstance().enableAppResumeWithActivity(MainActivity.class);
+        AdsManager.showAdBannerCollapsible(this,AdsManager.INSTANCE.getBannerHolder(), findViewById(R.id.banner),findViewById(R.id.line));
     }
 }
