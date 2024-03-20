@@ -174,10 +174,15 @@ object AdmobUtils {
         mAdView.adUnitId = bannerId!!
         val adSize = getAdSize(activity)
         mAdView.setAdSize(adSize)
-        viewGroup.removeAllViews()
         val tagView = activity.layoutInflater.inflate(R.layout.layoutbanner_loading, null, false)
-        viewGroup.addView(tagView, 0)
-        viewGroup.addView(mAdView, 1)
+
+        try {
+            viewGroup.removeAllViews()
+            viewGroup.addView(tagView, 0)
+            viewGroup.addView(mAdView, 1)
+        }catch (_: Exception){
+
+        }
         shimmerFrameLayout = tagView.findViewById(R.id.shimmer_view_container)
         shimmerFrameLayout?.startShimmer()
         mAdView.onPaidEventListener =
@@ -237,13 +242,16 @@ object AdmobUtils {
             bannerId = activity.getString(R.string.test_ads_admob_banner_collapsible_id)
         }
         banner.mAdView?.adUnitId = bannerId
-        viewGroup.removeAllViews()
+        val tagView = activity.layoutInflater.inflate(R.layout.layoutbanner_loading, null, false)
+        try {
+            viewGroup.removeAllViews()
+            viewGroup.addView(tagView, 0)
+            viewGroup.addView(banner.mAdView, 1)
+        }catch (_: Exception){
+
+        }
         val adSize = getAdSize(activity)
         banner.mAdView?.setAdSize(adSize)
-
-        val tagView = activity.layoutInflater.inflate(R.layout.layoutbanner_loading, null, false)
-        viewGroup.addView(tagView, 0)
-        viewGroup.addView(banner.mAdView, 1)
         shimmerFrameLayout = tagView.findViewById(R.id.shimmer_view_container)
         shimmerFrameLayout?.startShimmer()
 
@@ -303,13 +311,16 @@ object AdmobUtils {
             bannerId = activity.getString(R.string.test_ads_admob_banner_collapsible_id)
         }
         mAdView.adUnitId = bannerId!!
-        viewGroup.removeAllViews()
         val adSize = getAdSize(activity)
         mAdView.setAdSize(adSize)
-
         val tagView = activity.layoutInflater.inflate(R.layout.layoutbanner_loading, null, false)
-        viewGroup.addView(tagView, 0)
-        viewGroup.addView(mAdView, 1)
+        try {
+            viewGroup.removeAllViews()
+            viewGroup.addView(tagView, 0)
+            viewGroup.addView(mAdView, 1)
+        }catch (_: Exception){
+
+        }
         shimmerFrameLayout = tagView.findViewById(R.id.shimmer_view_container)
         shimmerFrameLayout?.startShimmer()
 

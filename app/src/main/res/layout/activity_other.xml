@@ -37,7 +37,6 @@
 
         <View
             android:id="@+id/line"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_above="@id/banner"
@@ -46,7 +45,6 @@
 
         <FrameLayout
             android:id="@+id/banner"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

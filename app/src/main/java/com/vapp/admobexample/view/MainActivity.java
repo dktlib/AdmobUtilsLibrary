@@ -299,7 +299,7 @@ public class MainActivity extends AppCompatActivity {
                 AdsManager.INSTANCE.showAdNativeMedium(MainActivity.this,viewNativeAds,AdsManager.INSTANCE.getNativeHolder());
             }
         });
-//        AdsManager.showAdBanner(this,"", findViewById(R.id.banner),findViewById(R.id.line));
+        AdsManager.showAdBanner(this,"", findViewById(R.id.banner),findViewById(R.id.line));
 
 //        AdmobUtils.loadAndShowBannerCollapsibleWithConfig(this, "", 5, findViewById(R.id.banner), new AdmobUtils.BannerCollapsibleAdCallback() {
 //            @Override
@@ -389,6 +389,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         AppOpenManager.getInstance().enableAppResumeWithActivity(MainActivity.class);
-        AdsManager.showAdBannerCollapsible(this,AdsManager.INSTANCE.getBannerHolder(), findViewById(R.id.banner),findViewById(R.id.line));
+//        AdsManager.showAdBannerCollapsible(this,AdsManager.INSTANCE.getBannerHolder(), findViewById(R.id.banner),findViewById(R.id.line));
     }
 }
