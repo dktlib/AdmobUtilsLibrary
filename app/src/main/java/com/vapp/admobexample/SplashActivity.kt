@@ -1,5 +1,6 @@
 package com.vapp.admobexample
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
@@ -21,6 +22,7 @@ import java.security.NoSuchAlgorithmException
 import java.util.concurrent.atomic.AtomicBoolean
 
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     var aoaManager: AOAManager? = null
     var isAOAFalse = false
@@ -120,7 +122,7 @@ class SplashActivity : AppCompatActivity() {
     fun showAOA(){
         aoaManager = AOAManager(
             this,
-            "ca-app-pub-3940256099942544/3419835294",
+            "",
             20000,
             object : AOAManager.AppOpenAdsListener {
                 override fun onAdPaid(adValue: AdValue, s: String) {

@@ -618,7 +618,7 @@ object AdmobUtils {
         shimmerFrameLayout.startShimmer()
 
         if (isTesting) {
-            s = activity.getString(R.string.test_ads_admob_native_video_id)
+            s = activity.getString(R.string.test_ads_admob_native_id)
         }
         val adLoader = AdLoader.Builder(activity, s)
             .forNativeAd { nativeAd ->

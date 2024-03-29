@@ -1,5 +1,7 @@
 package com.vapp.admobexample.view;
 
+import static com.vapp.admobexample.utilsdemp.AdsManager.showAdBannerCollapsible;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -299,7 +301,8 @@ public class MainActivity extends AppCompatActivity {
                 AdsManager.INSTANCE.showAdNativeMedium(MainActivity.this,viewNativeAds,AdsManager.INSTANCE.getNativeHolder());
             }
         });
-        AdsManager.showAdBanner(this,"", findViewById(R.id.banner),findViewById(R.id.line));
+//        AdsManager.showAdBanner(this,"", findViewById(R.id.banner),findViewById(R.id.line));
+        showAdBannerCollapsible(this, "", findViewById(R.id.banner), findViewById(R.id.line));
 
 //        AdmobUtils.loadAndShowBannerCollapsibleWithConfig(this, "", 5, findViewById(R.id.banner), new AdmobUtils.BannerCollapsibleAdCallback() {
 //            @Override

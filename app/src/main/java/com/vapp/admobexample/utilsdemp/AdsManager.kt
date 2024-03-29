@@ -280,9 +280,9 @@ object AdsManager {
     }
 
     @JvmStatic
-    fun showAdBannerCollapsible(activity: Activity, bannerHolder: BannerHolder, view: ViewGroup, line: View) {
+    fun showAdBannerCollapsible(activity: Activity, bannerHolder: String, view: ViewGroup, line: View) {
         if (AdmobUtils.isNetworkConnected(activity)) {
-            AdmobUtils.loadAdBannerCollapsibleReload(
+            AdmobUtils.loadAdBannerCollapsible(
                 activity,
                 bannerHolder,
                 CollapsibleBanner.BOTTOM,
