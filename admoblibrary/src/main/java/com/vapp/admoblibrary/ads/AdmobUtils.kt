@@ -804,6 +804,8 @@ object AdmobUtils {
                         }
                         showInterstitialAdNew(activity, aBoolean, adCallback)
                     }, 400)
+                }else{
+                    interHolder.check = true
                 }
             }
             return
