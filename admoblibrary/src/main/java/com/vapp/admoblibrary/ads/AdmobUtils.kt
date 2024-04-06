@@ -786,6 +786,7 @@ object AdmobUtils {
                                 Log.e("Admodfail", "errorCodeAds" + adError.cause)
                                 interHolder.mutable.removeObservers((activity as LifecycleOwner))
                                 interHolder.mutable.value = null
+                                handler.removeCallbacksAndMessages(null)
                                 adCallback?.onAdFail(adError.message)
                             }
 
@@ -815,6 +816,7 @@ object AdmobUtils {
                     AppOpenManager.getInstance().isAppResumeEnabled = true
                 }
                 adCallback.onAdFail("inter null")
+                handler.removeCallbacksAndMessages(null)
             }
         } else {
             if (enableLoadingDialog) {
@@ -840,6 +842,7 @@ object AdmobUtils {
                             if (AppOpenManager.getInstance().isInitialized) {
                                 AppOpenManager.getInstance().isAppResumeEnabled = true
                             }
+                            handler.removeCallbacksAndMessages(null)
                             isClick = false
                             interHolder.inter = null
                             interHolder.mutable.removeObservers((activity as LifecycleOwner))

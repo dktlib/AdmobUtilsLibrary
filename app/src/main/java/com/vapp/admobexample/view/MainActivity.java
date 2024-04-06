@@ -83,13 +83,6 @@ public class MainActivity extends AppCompatActivity {
         btn_ShowInter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                AdsManager.INSTANCE.showAdInter(MainActivity.this, AdsManager.INSTANCE.getInterholder(), new AdsManager.AdListener() {
-//                    @Override
-//                    public void onAdClosedOrFailed() {
-//                        Utils.getInstance().addActivity(MainActivity.this, OtherActivity.class);
-//                    }
-//                });
-
                 AdmobUtils.loadAndShowAdInterstitial(MainActivity.this, AdsManager.INSTANCE.getInterholder(), new AdsInterCallBack() {
                     @Override
                     public void onStartAction() {
