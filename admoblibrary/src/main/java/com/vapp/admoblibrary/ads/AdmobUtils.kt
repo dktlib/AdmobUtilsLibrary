@@ -442,7 +442,7 @@ object AdmobUtils {
                     adCallback.onAdFail(adError.message)
                 }
             })
-            .withNativeAdOptions(NativeAdOptions.Builder().setVideoOptions(videoOptions).build()).build()
+            .withNativeAdOptions(NativeAdOptions.Builder().build()).build()
         if (adRequest != null) {
             adLoader.loadAd(adRequest!!)
         }
@@ -574,7 +574,7 @@ object AdmobUtils {
                     adCallback.onAdFail(adError.message)
                 }
             })
-            .withNativeAdOptions(NativeAdOptions.Builder().setVideoOptions(videoOptions).build()).build()
+            .withNativeAdOptions(NativeAdOptions.Builder().build()).build()
         if (adRequest != null) {
             adLoader.loadAd(adRequest!!)
         }
@@ -603,8 +603,8 @@ object AdmobUtils {
             viewGroup.visibility = View.GONE
             return
         }
-        val videoOptions =
-            VideoOptions.Builder().setStartMuted(false).build()
+//        val videoOptions =
+//            VideoOptions.Builder().setStartMuted(false).build()
         viewGroup.removeAllViews()
         var s = nativeHolder.ads
         val tagView: View = if (size === GoogleENative.UNIFIED_MEDIUM) {
@@ -648,7 +648,7 @@ object AdmobUtils {
                     adCallback.onClickAds()
                 }
             })
-            .withNativeAdOptions(NativeAdOptions.Builder().setVideoOptions(videoOptions).build()).build()
+            .withNativeAdOptions(NativeAdOptions.Builder().build()).build()
         if (adRequest != null) {
             adLoader.loadAd(adRequest!!)
         }
