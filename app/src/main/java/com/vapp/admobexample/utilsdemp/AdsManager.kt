@@ -115,7 +115,7 @@ object AdsManager {
         })
     }
 
-    fun showAdInter(context: Context, interHolder: InterHolder, callback: AdListener, ) {
+    fun showAdInter(context: Context, interHolder: InterHolder, callback: AdListener,reload : Boolean) {
         AppOpenManager.getInstance().isAppResumeEnabled = true
         AdmobUtils.showAdInterstitialWithCallbackNotLoadNew(
             context as Activity,
@@ -128,7 +128,9 @@ object AdsManager {
                 }
 
                 override fun onEventClickAdClosed() {
-                    loadInter(context, interHolder)
+                    if (reload){
+                        loadInter(context, interHolder)
+                    }
                     callback.onAdClosedOrFailed()
                 }
 
@@ -148,9 +150,9 @@ object AdsManager {
                 }
 
                 override fun onAdFail(error: String?) {
-                    Log.d("===Failed", error.toString())
-                    val log = error?.split(":")?.get(0)?.replace(" ", "_")
-                    loadInter(context, interHolder)
+                    if (reload){
+                        loadInter(context, interHolder)
+                    }
                     callback.onAdClosedOrFailed()
                 }
 

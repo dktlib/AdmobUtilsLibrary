@@ -1,13 +1,13 @@
 package com.vapp.admobexample;
 
-import android.app.Application;
 import android.content.Context;
 
 import androidx.multidex.MultiDex;
 
+import com.vapp.admoblibrary.AdmobApplication;
 import com.vapp.admoblibrary.ads.AppOpenManager;
 
-public class MyApplication extends Application {
+public class MyApplication extends AdmobApplication {
     boolean isShowAds = true;
     boolean isShowAdsResume = true;
 

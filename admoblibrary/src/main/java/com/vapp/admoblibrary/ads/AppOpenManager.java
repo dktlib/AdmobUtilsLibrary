@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AppOpenManager implements Application.ActivityLifecycleCallbacks, DefaultLifecycleObserver {
+public class AppOpenManager implements Application.ActivityLifecycleCallbacks, LifecycleObserver  {
     private static final String TAG = "AppOpenManager";
     private static volatile AppOpenManager INSTANCE;
     private AppOpenAd appResumeAd = null;
@@ -350,10 +350,9 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, D
             }, 100);
         }
     }
-
-    @Override
-    public void onStart(@NonNull LifecycleOwner owner) {
-        DefaultLifecycleObserver.super.onStart(owner);
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    protected void onMoveToForeground() {
+        // Show the ad (if available) when the app moves to foreground.
         Log.d("===Onresume", "onresume");
         if (currentActivity == null) {
             return;
@@ -381,11 +380,6 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, D
         }
         showAdIfAvailable(false);
     }
-
-//    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-//    public void onResume() {
-//
-//    }
 
     public void showDialog(Context context){
         isShowingAdsOnResume = true;
