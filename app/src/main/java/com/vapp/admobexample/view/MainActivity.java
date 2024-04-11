@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onAdShowed() {
                         Utils.getInstance().showMessenger(MainActivity.this, "onAdShowed");
-                        new Handler().postDelayed(() -> AdmobUtils.dismissAdDialog(),800);
+                        new Handler().postDelayed(AdmobUtils::dismissAdDialog,800);
                     }
 
                     @Override

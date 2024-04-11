@@ -655,6 +655,58 @@ object AdmobUtils {
         Log.e("Admod", "loadAdNativeAds")
     }
 
+    @JvmStatic
+    fun loadAndShowNativeAdsWithLayoutAdsNoShimmer(
+        activity: Activity,
+        nativeHolder: NativeHolder,
+        viewGroup: ViewGroup,
+        layout: Int,
+        size: GoogleENative,
+        adCallback: NativeAdCallbackNew
+    ) {
+        Log.d("===Native", "Native1")
+        if (!isShowAds || !isNetworkConnected(activity)) {
+            viewGroup.visibility = View.GONE
+            return
+        }
+        viewGroup.removeAllViews()
+        var s = nativeHolder.ads
+        if (isTesting) {
+            s = activity.getString(R.string.test_ads_admob_native_id)
+        }
+        val adLoader = AdLoader.Builder(activity, s)
+            .forNativeAd { nativeAd ->
+                adCallback.onNativeAdLoaded()
+                val adView = activity.layoutInflater
+                    .inflate(layout, null) as NativeAdView
+                populateNativeAdView(nativeAd, adView, size)
+                viewGroup.removeAllViews()
+                viewGroup.addView(adView)
+                nativeAd.setOnPaidEventListener { adValue: AdValue ->
+                    adCallback.onAdPaid(adValue,s)
+                }
+                //viewGroup.setVisibility(View.VISIBLE);
+            }.withAdListener(object : AdListener() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    Log.e("Admodfail", "onAdFailedToLoad" + adError.message)
+                    Log.e("Admodfail", "errorCodeAds" + adError.cause)
+                    viewGroup.removeAllViews()
+                    nativeHolder.isLoad = false
+                    adCallback.onAdFail(adError.message)
+                }
+
+                override fun onAdClicked() {
+                    super.onAdClicked()
+                    adCallback.onClickAds()
+                }
+            })
+            .withNativeAdOptions(NativeAdOptions.Builder().build()).build()
+        if (adRequest != null) {
+            adLoader.loadAd(adRequest!!)
+        }
+        Log.e("Admod", "loadAdNativeAds")
+    }
+
     //Load Inter in here
     @JvmStatic
     fun loadAndGetAdInterstitial(
