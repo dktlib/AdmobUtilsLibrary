@@ -162,5 +162,4 @@ class NativeFunc {
            }
        }
     }
-
 }
