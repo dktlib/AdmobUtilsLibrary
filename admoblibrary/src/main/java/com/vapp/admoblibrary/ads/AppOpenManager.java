@@ -135,7 +135,7 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
 
     public void enableAppResumeWithActivity(Class activityClass) {
         Log.d(TAG, "enableAppResumeWithActivity: " + activityClass.getName());
-        disabledAppOpenList.remove(activityClass);
+        new Handler().postDelayed(() -> disabledAppOpenList.remove(activityClass),40);
     }
 
 
