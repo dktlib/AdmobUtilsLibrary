@@ -296,8 +296,8 @@ public class MainActivity extends AppCompatActivity {
                 AdsManager.INSTANCE.showAdNativeMedium(MainActivity.this,viewNativeAds,AdsManager.INSTANCE.getNativeHolder());
             }
         });
-//        AdsManager.showAdBanner(this,"", findViewById(R.id.banner),findViewById(R.id.line));
-        showAdBannerCollapsible(this, "", findViewById(R.id.banner), findViewById(R.id.line));
+        AdsManager.showAdBanner(this,"",AdSize.MEDIUM_RECTANGLE, findViewById(R.id.banner),findViewById(R.id.line));
+//        showAdBannerCollapsible(this, "", findViewById(R.id.banner), findViewById(R.id.line));
 
 //        AdmobUtils.loadAndShowBannerCollapsibleWithConfig(this, "", 5, findViewById(R.id.banner), new AdmobUtils.BannerCollapsibleAdCallback() {
 //            @Override

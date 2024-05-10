@@ -17,7 +17,7 @@ class OtherActivity : AppCompatActivity() {
         binding = ActivityOtherBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
         setResult(5)
-                AdsManager.showAdBanner(this,"", findViewById(R.id.banner),findViewById(R.id.line));
+//                AdsManager.showAdBanner(this,"",, findViewById(R.id.banner),findViewById(R.id.line));
 //        showAdBannerCollapsible(this, AdsManager.bannerHolder_other, findViewById(R.id.banner), findViewById(R.id.line))
 //        AdsManager.loadAndShowNativeFullScreen(this,binding!!.nativeAds,nativeHolder)
         //        if (AdmodUtils.getInstance().dialog != null) {

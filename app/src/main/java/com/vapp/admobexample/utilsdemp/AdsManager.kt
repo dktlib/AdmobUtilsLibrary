@@ -318,9 +318,9 @@ object AdsManager {
     }
 
     @JvmStatic
-    fun showAdBanner(activity: Activity, bannerHolder: String, view: ViewGroup, line: View) {
+    fun showAdBanner(activity: Activity, bannerHolder: String,size: AdSize, view: ViewGroup, line: View) {
         if (AdmobUtils.isNetworkConnected(activity)) {
-            AdmobUtils.loadAdBanner(activity, bannerHolder, view, object :
+            AdmobUtils.loadAdBannerWithSize(activity, bannerHolder, view,size, object :
                 AdmobUtils.BannerCallBack {
                 override fun onClickAds() {
 

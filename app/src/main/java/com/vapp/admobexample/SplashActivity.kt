@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.ads.AdValue
+import com.vapp.admobexample.databinding.SplashBinding
 import com.vapp.admobexample.utilsdemp.AdsManager.interholder
 import com.vapp.admobexample.view.MainActivity
 import com.vapp.admoblibrary.AdsInterCallBack
@@ -27,6 +28,7 @@ class SplashActivity : AppCompatActivity() {
     var aoaManager: AOAManager? = null
     var isAOAFalse = false
     private var isMobileAdsInitializeCalled = AtomicBoolean(false)
+    val binding by lazy { SplashBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash)

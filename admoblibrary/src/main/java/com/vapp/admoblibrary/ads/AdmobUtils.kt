@@ -215,6 +215,73 @@ object AdmobUtils {
         }
         Log.e(" Admod", "loadAdBanner")
     }
+
+    @JvmStatic
+    fun loadAdBannerWithSize(
+        activity: Activity,
+        bannerId: String?,
+        viewGroup: ViewGroup,adSize: AdSize,
+        bannerAdCallback: BannerCallBack
+    ) {
+        var bannerId = bannerId
+        if (!isShowAds || !isNetworkConnected(activity)) {
+            viewGroup.visibility = View.GONE
+            bannerAdCallback.onFailed("None Show")
+            return
+        }
+        val mAdView = AdView(activity)
+        if (isTesting) {
+            bannerId = activity.getString(R.string.test_ads_admob_banner_id)
+        }
+        mAdView.adUnitId = bannerId!!
+        var size = adSize
+        if (size == AdSize.BANNER){
+            size = getAdSize(activity)
+        }
+        mAdView.setAdSize(size)
+        val tagView = activity.layoutInflater.inflate(R.layout.layoutbanner_loading, null, false)
+
+        try {
+            viewGroup.removeAllViews()
+            viewGroup.addView(tagView, 0)
+            viewGroup.addView(mAdView, 1)
+        }catch (_: Exception){
+
+        }
+        shimmerFrameLayout = tagView.findViewById(R.id.shimmer_view_container)
+        shimmerFrameLayout?.startShimmer()
+        mAdView.onPaidEventListener =
+            OnPaidEventListener { adValue -> bannerAdCallback.onPaid(adValue, mAdView) }
+        mAdView.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                shimmerFrameLayout?.stopShimmer()
+                viewGroup.removeView(tagView)
+                bannerAdCallback.onLoad()
+            }
+
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                Log.e(" Admod", "failloadbanner" + adError.message)
+                shimmerFrameLayout?.stopShimmer()
+                viewGroup.removeView(tagView)
+                bannerAdCallback.onFailed(adError.message)
+            }
+
+            override fun onAdOpened() {}
+            override fun onAdClicked() {
+                bannerAdCallback.onClickAds()
+            }
+
+            override fun onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        }
+        if (adRequest != null) {
+            mAdView.loadAd(adRequest!!)
+        }
+        Log.e(" Admod", "loadAdBanner")
+    }
+
     interface BannerCollapsibleAdCallback {
         fun onClickAds()
         fun onBannerAdLoaded(adSize: AdSize)
