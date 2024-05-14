@@ -239,7 +239,17 @@ object AdmobUtils {
             size = getAdSize(activity)
         }
         mAdView.setAdSize(size)
-        val tagView = activity.layoutInflater.inflate(R.layout.layoutbanner_loading, null, false)
+        val tagView = when (size) {
+            AdSize.MEDIUM_RECTANGLE -> {
+                activity.layoutInflater.inflate(R.layout.layout_banner_medium_loading, null, false)
+            }
+            AdSize.LARGE_BANNER -> {
+                activity.layoutInflater.inflate(R.layout.layout_banner_large_loading, null, false)
+            }
+            else -> {
+                activity.layoutInflater.inflate(R.layout.layoutbanner_loading, null, false)
+            }
+        }
 
         try {
             viewGroup.removeAllViews()
@@ -390,7 +400,7 @@ object AdmobUtils {
         shimmerFrameLayout = tagView.findViewById(R.id.shimmer_view_container)
         shimmerFrameLayout?.startShimmer()
 
-        mAdView?.adListener = object : AdListener() {
+        mAdView.adListener = object : AdListener() {
             override fun onAdLoaded() {
                 mAdView.onPaidEventListener =
                     OnPaidEventListener { adValue -> callback.onAdPaid(adValue, mAdView) }

@@ -73,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                AdsManager.INSTANCE.loadNative(MainActivity.this,AdsManager.INSTANCE.getNativeHolder());
 //                aoaManager.loadAndShowAoA();
-                mStartForResult.launch(new Intent(MainActivity.this, OtherActivity.class));
+                AdsManager.showAdBanner(MainActivity.this,"",AdSize.LARGE_BANNER, findViewById(R.id.banner),findViewById(R.id.line));
+
             }
         });
         btn_LoadInter.setOnClickListener(new View.OnClickListener() {
@@ -240,14 +241,16 @@ public class MainActivity extends AppCompatActivity {
         btn_IAP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.getInstance().addActivity(MainActivity.this, IAPActivity.class);
+                AdsManager.showAdBanner(MainActivity.this,"",AdSize.BANNER, findViewById(R.id.banner),findViewById(R.id.line));
+
             }
         });
 
         btn_Rate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialogRate();
+                AdsManager.showAdBanner(MainActivity.this,"",AdSize.MEDIUM_RECTANGLE, findViewById(R.id.banner),findViewById(R.id.line));
+
             }
         });
 
@@ -296,7 +299,6 @@ public class MainActivity extends AppCompatActivity {
                 AdsManager.INSTANCE.showAdNativeMedium(MainActivity.this,viewNativeAds,AdsManager.INSTANCE.getNativeHolder());
             }
         });
-        AdsManager.showAdBanner(this,"",AdSize.MEDIUM_RECTANGLE, findViewById(R.id.banner),findViewById(R.id.line));
 //        showAdBannerCollapsible(this, "", findViewById(R.id.banner), findViewById(R.id.line));
 
 //        AdmobUtils.loadAndShowBannerCollapsibleWithConfig(this, "", 5, findViewById(R.id.banner), new AdmobUtils.BannerCollapsibleAdCallback() {
