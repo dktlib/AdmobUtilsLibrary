@@ -59,7 +59,7 @@ dependencies {
     implementation project(':admoblibrary')  // tên của mdule
     def multidex_version = "2.0.1"
     implementation "androidx.multidex:multidex:$multidex_version"
-    implementation 'com.google.android.gms:play-services-ads:23.0.0'
+    implementation 'com.google.android.gms:play-services-ads:23.1.0'
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
     implementation platform('com.google.firebase:firebase-bom:31.0.1')

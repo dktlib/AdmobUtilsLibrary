@@ -102,8 +102,6 @@ object AdmobUtils {
     var shimmerFrameLayout: ShimmerFrameLayout?=null
     //id thật
     var idIntersitialReal: String? = null
-    var interIsShowingWithNative = false
-    var interIsShowingWithBanner = false
     //Hàm Khởi tạo admob
     @JvmStatic
     fun initAdmob(context: Context?, timeout: Int, isDebug: Boolean, isEnableAds: Boolean) {
@@ -298,7 +296,6 @@ object AdmobUtils {
         fun onAdFail(message : String)
         fun onAdPaid(adValue: AdValue, mAdView: AdView)
     }
-    var mAdView :AdView? = null
     @JvmStatic
     fun loadAdBannerCollapsibleReload(
         activity: Activity,
@@ -658,6 +655,49 @@ object AdmobUtils {
         Log.e("Admod", "loadAdNativeAds")
     }
 
+    @JvmStatic
+    fun loadAndShowNativeAdsWithLayoutShimmer(
+        activity: Activity,
+        s: String?,
+        viewGroup: ViewGroup,
+        layout: Int,
+        size: GoogleENative,
+        adCallback: NativeAdCallback
+    ) {
+        if (!isShowAds || !isNetworkConnected(activity)) {
+            viewGroup.visibility = View.GONE
+            return
+        }
+        var s = s
+        if (isTesting) {
+            s = activity.getString(R.string.test_ads_admob_native_id)
+        }
+        val videoOptions =
+            VideoOptions.Builder().setStartMuted(false).build()
+        val adLoader: AdLoader = AdLoader.Builder(activity, s!!)
+            .forNativeAd { nativeAd ->
+                nativeAd.setOnPaidEventListener { adValue: AdValue -> adCallback.onAdPaid(adValue,s) }
+                adCallback.onNativeAdLoaded()
+                val adView = activity.layoutInflater
+                    .inflate(layout, null) as NativeAdView
+                populateNativeAdView(nativeAd, adView, size)
+                viewGroup.removeAllViews()
+                viewGroup.addView(adView)
+            }.withAdListener(object : AdListener() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    Log.e("Admodfail", "onAdFailedToLoad" + adError.message)
+                    Log.e("Admodfail", "errorCodeAds" + adError.cause)
+                    viewGroup.removeAllViews()
+                    adCallback.onAdFail(adError.message)
+                }
+            })
+            .withNativeAdOptions(NativeAdOptions.Builder().build()).build()
+        if (adRequest != null) {
+            adLoader.loadAd(adRequest!!)
+        }
+        Log.e("Admod", "loadAdNativeAds")
+    }
+
     interface NativeAdCallbackNew{
         fun onLoadedAndGetNativeAd(ad: NativeAd?)
         fun onNativeAdLoaded()
@@ -746,7 +786,6 @@ object AdmobUtils {
             viewGroup.visibility = View.GONE
             return
         }
-        viewGroup.removeAllViews()
         var s = nativeHolder.ads
         if (isTesting) {
             s = activity.getString(R.string.test_ads_admob_native_id)

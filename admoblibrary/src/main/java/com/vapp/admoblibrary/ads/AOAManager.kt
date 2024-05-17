@@ -24,7 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class AOAManager(private val activity: Activity,val appOpen: String,val timeOut: Long, val appOpenAdsListener: AppOpenAdsListener) {
+class AOAManager(private val activity: Activity,val appOpen: String,val timeOut: Long, val isShow : Boolean, val appOpenAdsListener: AppOpenAdsListener) {
     private var appOpenAd: AppOpenAd? = null
     var isShowingAd = true
     var isLoading = true
@@ -36,7 +36,7 @@ class AOAManager(private val activity: Activity,val appOpen: String,val timeOut:
     private val isAdAvailable: Boolean
         get() = appOpenAd != null
 
-    fun loadAndShowAoA() {
+    fun loadAoA() {
         Log.d("===Load","id1")
         var idAoa = appOpen
         if (AdmobUtils.isTesting){
@@ -80,9 +80,10 @@ class AOAManager(private val activity: Activity,val appOpen: String,val timeOut:
                 override fun onAdLoaded(ad: AppOpenAd) {
                     super.onAdLoaded(ad)
                     appOpenAd = ad
+                    appOpenAdsListener.onAdsLoaded()
                     job.cancel()
                     Log.d("====Timeout", "isAdAvailable = true")
-                    if (!AppOpenManager.getInstance().isShowingAd && !isShowingAd){
+                    if (!AppOpenManager.getInstance().isShowingAd && !isShowingAd && isShow){
                         showAdIfAvailable()
                     }
                 }
@@ -188,6 +189,7 @@ class AOAManager(private val activity: Activity,val appOpen: String,val timeOut:
     }
     interface AppOpenAdsListener {
         fun onAdsClose()
+        fun onAdsLoaded()
         fun onAdsFailed(message : String)
         fun onAdPaid(adValue: AdValue, adUnitAds : String)
     }
