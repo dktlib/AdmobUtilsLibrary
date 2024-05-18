@@ -280,16 +280,16 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
         }
         Log.d("===Onresume", "FullScreenContentCallback");
         if (!isShowingAd && isAdAvailable(isSplash)) {
+            isDismiss = true;
             FullScreenContentCallback callback =
                     new FullScreenContentCallback() {
                         @Override
                         public void onAdDismissedFullScreenContent() {
-                            isDismiss = true;
                             Log.d("==TestAOA==", "onResume: true");
                             new Handler().postDelayed(() -> {
                                 isDismiss = false;
                                 Log.d("==TestAOA==", "onResume: false");
-                            },100);
+                            },200);
                             isLoading = false;
                             Log.d(TAG, "onAdShowedFullScreenContent: Dismiss");
                             try {
@@ -310,6 +310,7 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
                         @Override
                         public void onAdFailedToShowFullScreenContent(AdError adError) {
                             isLoading = false;
+                            isDismiss = false;
                             Log.d(TAG, "onAdShowedFullScreenContent: Show false");
                             try {
                                 dialogFullScreen.dismiss();
