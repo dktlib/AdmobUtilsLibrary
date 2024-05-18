@@ -7,10 +7,11 @@ import android.os.Looper
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.CallSuper
+import com.vapp.admoblibrary.ads.model.BannerConfigHolder
 import com.vapp.admoblibrary.ads.remote.BannerPlugin.Companion.log
 import kotlin.math.max
 
-internal abstract class BaseAdView(
+abstract class BaseAdView(
     context: Context,
     private val refreshRateSec: Int?
 ) : FrameLayout(context) {
@@ -89,13 +90,13 @@ internal abstract class BaseAdView(
             adUnitId: String,
             bannerType: BannerPlugin.BannerType,
             refreshRateSec: Int?,
-            cbFetchIntervalSec: Int,bannerRemoteConfig: BannerRemoteConfig
+            cbFetchIntervalSec: Int,bannerRemoteConfig: BannerRemoteConfig,bannerConfigHolder: BannerConfigHolder
         ): BaseAdView {
             return when (bannerType) {
                 BannerPlugin.BannerType.Adaptive,
                 BannerPlugin.BannerType.Standard,
                 BannerPlugin.BannerType.CollapsibleBottom,
-                BannerPlugin.BannerType.CollapsibleTop -> BannerAdView(activity, adUnitId, bannerType, refreshRateSec, cbFetchIntervalSec ,bannerRemoteConfig)
+                BannerPlugin.BannerType.CollapsibleTop -> BannerAdView(activity, adUnitId, bannerType, refreshRateSec, cbFetchIntervalSec ,bannerRemoteConfig,bannerConfigHolder)
             }
         }
     }

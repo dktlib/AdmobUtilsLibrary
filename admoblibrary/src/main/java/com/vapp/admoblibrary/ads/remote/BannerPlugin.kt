@@ -9,6 +9,7 @@ import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.gson.annotations.SerializedName
 import com.vapp.admoblibrary.R
 import com.vapp.admoblibrary.ads.AdmobUtils
+import com.vapp.admoblibrary.ads.model.BannerConfigHolder
 import com.vapp.admoblibrary.ads.remote.BannerPlugin.BannerConfig.Companion.TYPE_ADAPTIVE
 import com.vapp.admoblibrary.ads.remote.BannerPlugin.BannerConfig.Companion.TYPE_COLLAPSIBLE_BOTTOM
 import com.vapp.admoblibrary.ads.remote.BannerPlugin.BannerConfig.Companion.TYPE_COLLAPSIBLE_TOP
@@ -18,7 +19,7 @@ import com.vapp.admoblibrary.ads.remote.BannerPlugin.BannerConfig.Companion.TYPE
 class BannerPlugin(
     private val activity: Activity,
     private val adContainer: ViewGroup,
-    private val id: String,
+    private val holder: BannerConfigHolder,
     private val bannerConfig: BannerConfig?,
     var bannerRemoteConfig: BannerRemoteConfig
 ) {
@@ -71,7 +72,7 @@ class BannerPlugin(
 
     private var adView: BaseAdView? = null
     var config: Config = Config().apply {
-        this.defaultAdUnitId = id
+        this.defaultAdUnitId = holder.ads
         this.defaultBannerType = BannerType.Adaptive
         this.defaultRefreshRateSec = 10
         this.defaultCBFetchIntervalSec = 20
@@ -109,14 +110,14 @@ class BannerPlugin(
         cbFetchIntervalSec = bannerConfig?.cbFetchIntervalSec ?: cbFetchIntervalSec
 
         log("\n adUnitId = $adUnitId \n bannerType = $bannerType \n refreshRateSec = $refreshRateSec \n cbFetchIntervalSec = $cbFetchIntervalSec")
-
+        holder.mAdView?.destroy()
         adView = BaseAdView.Factory.getAdView(
                                            activity,
             adUnitId,
             bannerType,
             refreshRateSec,
             cbFetchIntervalSec,
-            bannerRemoteConfig
+            bannerRemoteConfig,holder
         )
         adContainer.addView(adView, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT))
     }

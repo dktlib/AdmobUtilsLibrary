@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        AppOpenManager.getInstance().disableAppResumeWithActivity(this.getClass());
         findbyid();
         AdsManager.INSTANCE.loadNativeFullScreen(this,AdsManager.INSTANCE.getNativeHolder());
         //API data sample
@@ -390,7 +391,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         if (!AppOpenManager.getInstance().isDismiss){
             Log.d("==TestAOA==", "onResume: Activity");
-            AdmobUtils.loadAndShowBannerCollapsibleWithConfig(this, "", 5,10, findViewById(R.id.banner), new AdmobUtils.BannerCollapsibleAdCallback() {
+            AdmobUtils.loadAndShowBannerCollapsibleWithConfig(this, AdsManager.INSTANCE.getBannerHolder(), 20,0, findViewById(R.id.banner), new AdmobUtils.BannerCollapsibleAdCallback() {
                 @Override
                 public void onClickAds() {
 

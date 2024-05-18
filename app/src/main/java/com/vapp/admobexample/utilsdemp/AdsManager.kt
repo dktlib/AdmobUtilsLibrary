@@ -25,6 +25,7 @@ import com.vapp.admoblibrary.ads.NativeAdCallback
 import com.vapp.admoblibrary.ads.admobnative.enumclass.CollapsibleBanner
 import com.vapp.admoblibrary.ads.admobnative.enumclass.GoogleENative
 import com.vapp.admoblibrary.ads.model.AppOpenAppHolder
+import com.vapp.admoblibrary.ads.model.BannerConfigHolder
 import com.vapp.admoblibrary.ads.model.BannerHolder
 import com.vapp.admoblibrary.ads.model.InterHolder
 import com.vapp.admoblibrary.ads.model.NativeHolder
@@ -40,13 +41,13 @@ object AdsManager {
     var check_inter1 = false
 
     var nativeHolder = NativeHolder("")
-    var bannerHolder = BannerHolder("")
+    var bannerHolder = BannerConfigHolder("")
     var bannerHolder_other = BannerHolder("")
     var aoaHolder = AppOpenAppHolder("", "")
     var interholder = InterHolder("")
     var interRewardHolder = RewardedInterstitialHolder("")
     fun loadAndShowBannerRemote(activity: Activity, id : String ,bannerConfig: BannerPlugin.BannerConfig?, view: ViewGroup, line: View){
-        BannerPlugin(activity, view,id,bannerConfig,object : BannerRemoteConfig{
+        BannerPlugin(activity, view,bannerHolder,bannerConfig,object : BannerRemoteConfig{
                 override fun onBannerAdLoaded(adSize: AdSize?) {
                     view.visibility = View.VISIBLE
                     line.visibility = View.VISIBLE

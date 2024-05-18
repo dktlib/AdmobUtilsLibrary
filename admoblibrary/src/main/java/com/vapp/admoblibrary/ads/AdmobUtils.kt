@@ -54,6 +54,7 @@ import com.vapp.admoblibrary.ads.admobnative.NativeFunc.Companion.populateNative
 import com.vapp.admoblibrary.ads.admobnative.enumclass.CollapsibleBanner
 import com.vapp.admoblibrary.ads.admobnative.enumclass.GoogleENative
 import com.vapp.admoblibrary.ads.model.BannerAdCallback
+import com.vapp.admoblibrary.ads.model.BannerConfigHolder
 import com.vapp.admoblibrary.ads.model.BannerHolder
 import com.vapp.admoblibrary.ads.model.InterHolder
 import com.vapp.admoblibrary.ads.model.NativeHolder
@@ -442,14 +443,14 @@ object AdmobUtils {
     @JvmStatic
     fun loadAndShowBannerCollapsibleWithConfig(
         activity: Activity,
-        id: String,refreshRateSec : Int,cbFetchIntervalSec  : Int,view: ViewGroup,
+        id: BannerConfigHolder,refreshRateSec : Int,cbFetchIntervalSec  : Int,view: ViewGroup,
         bannerAdCallback: BannerCollapsibleAdCallback
     ) {
         var bannerPlugin: BannerPlugin? = null
-        val bannerConfig = BannerPlugin.BannerConfig(id,"collapsible_bottom",refreshRateSec,cbFetchIntervalSec)
+        val bannerConfig = BannerPlugin.BannerConfig(id.ads,"collapsible_bottom",refreshRateSec,cbFetchIntervalSec)
         bannerPlugin = bannerConfig.adUnitId?.let {
             BannerPlugin(
-                activity, view, it, bannerConfig, object : BannerRemoteConfig {
+                activity, view, id, bannerConfig, object : BannerRemoteConfig {
                     override fun onBannerAdLoaded(adSize: AdSize?) {
                         adSize?.let { it1 -> bannerAdCallback.onBannerAdLoaded(it1) }
                     }

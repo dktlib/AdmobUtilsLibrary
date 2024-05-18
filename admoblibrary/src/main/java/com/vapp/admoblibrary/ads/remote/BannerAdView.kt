@@ -12,6 +12,7 @@ import androidx.core.view.doOnLayout
 import androidx.core.view.updateLayoutParams
 import com.google.ads.mediation.admob.AdMobAdapter
 import com.google.android.gms.ads.*
+import com.vapp.admoblibrary.ads.model.BannerConfigHolder
 import com.vapp.admoblibrary.ads.remote.BannerPlugin.Companion.log
 
 @SuppressLint("ViewConstructor")
@@ -20,18 +21,18 @@ internal class BannerAdView(
     adUnitId: String,
     private val bannerType: BannerPlugin.BannerType,
     refreshRateSec: Int?,
-    private val cbFetchIntervalSec: Int,val bannerRemoteConfig: BannerRemoteConfig
+    private val cbFetchIntervalSec: Int,val bannerRemoteConfig: BannerRemoteConfig,val bannerConfigHolder: BannerConfigHolder
 ) : BaseAdView(activity, refreshRateSec) {
     companion object{
         var lastCBRequestTime = 0L
     }
-    private val adView: AdView = AdView(activity)
     private var hasSetAdSize = false
 
 
     init {
-        adView.adUnitId = adUnitId
-        addView(adView, getCenteredLayoutParams(this))
+        bannerConfigHolder.mAdView = AdView(activity)
+        bannerConfigHolder.mAdView?.adUnitId = adUnitId
+        addView(bannerConfigHolder.mAdView, getCenteredLayoutParams(this))
     }
 
     private fun getCenteredLayoutParams(container: ViewGroup) = when (container) {
@@ -48,8 +49,8 @@ internal class BannerAdView(
         if (!hasSetAdSize) {
             doOnLayout {
                 val adSize = getAdSize(bannerType)
-                adView.setAdSize(adSize)
-                adView.updateLayoutParams {
+                bannerConfigHolder.mAdView?.setAdSize(adSize)
+                bannerConfigHolder.mAdView?.updateLayoutParams {
                     width = adSize.getWidthInPixels(activity)
                     height = adSize.getHeightInPixels(activity)
                 }
@@ -106,10 +107,10 @@ internal class BannerAdView(
         if (isCollapsibleBannerRequest) {
             lastCBRequestTime = System.currentTimeMillis()
         }
-        adView.onPaidEventListener = OnPaidEventListener { adValue -> bannerRemoteConfig.onAdPaid(adValue,adView) }
-        adView.adListener = object : AdListener() {
+        bannerConfigHolder.mAdView?.onPaidEventListener = OnPaidEventListener { adValue -> bannerRemoteConfig.onAdPaid(adValue,bannerConfigHolder.mAdView!!) }
+        bannerConfigHolder.mAdView?.adListener = object : AdListener() {
             override fun onAdLoaded() {
-                adView.adListener = object : AdListener() {}
+                bannerConfigHolder.mAdView?.adListener = object : AdListener() {}
                 onDone()
                 BannerPlugin.shimmerFrameLayout?.stopShimmer()
                 bannerRemoteConfig.onBannerAdLoaded(getAdSize(bannerType))
@@ -117,13 +118,13 @@ internal class BannerAdView(
             }
 
             override fun onAdFailedToLoad(p0: LoadAdError) {
-                adView.adListener = object : AdListener() {}
+                bannerConfigHolder.mAdView?.adListener = object : AdListener() {}
                 onDone()
                 BannerPlugin.shimmerFrameLayout?.stopShimmer()
                 bannerRemoteConfig.onAdFail()
             }
         }
-        adView.loadAd(adRequestBuilder.build())
+        bannerConfigHolder.mAdView?.loadAd(adRequestBuilder.build())
     }
 
     private fun shouldRequestCollapsible(): Boolean {
@@ -133,15 +134,15 @@ internal class BannerAdView(
     override fun onVisibilityAggregated(isVisible: Boolean) {
         super.onVisibilityAggregated(isVisible)
         if (isVisible) {
-            adView.resume()
+            bannerConfigHolder.mAdView?.resume()
         } else {
-            adView.pause()
+            bannerConfigHolder.mAdView?.pause()
         }
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        adView.adListener = object : AdListener() {}
-        adView.destroy()
+        bannerConfigHolder.mAdView?.adListener = object : AdListener() {}
+        bannerConfigHolder.mAdView?.destroy()
     }
 }
