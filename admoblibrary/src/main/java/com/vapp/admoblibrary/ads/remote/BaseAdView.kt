@@ -13,11 +13,10 @@ import kotlin.math.max
 
 abstract class BaseAdView(
     context: Context,
-    private val refreshRateSec: Int?
+    private val refreshRateSec: Int?,val bannerConfigHolder: BannerConfigHolder
 ) : FrameLayout(context) {
 
     private var nextRefreshTime = 0L
-    private val refreshHandler by lazy { Handler(Looper.getMainLooper()) }
 
     private var isPausedOrDestroy = false
 
@@ -77,11 +76,11 @@ abstract class BaseAdView(
         stopBannerRefreshScheduleIfNeed()
         //Check size FrameLayout
         log("Ads are scheduled to show in $delay mils")
-        refreshHandler.postDelayed({ loadAd() }, delay)
+        bannerConfigHolder.refreshHandler.postDelayed({ loadAd() }, delay)
     }
 
     private fun stopBannerRefreshScheduleIfNeed() {
-        refreshHandler.removeCallbacksAndMessages(null)
+        bannerConfigHolder.refreshHandler.removeCallbacksAndMessages(null)
     }
 
     internal object Factory {
