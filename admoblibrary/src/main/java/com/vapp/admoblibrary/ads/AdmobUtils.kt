@@ -1610,7 +1610,7 @@ object AdmobUtils {
             nativeHolder.ads = context.getString(R.string.test_ads_admob_native_full_screen_id)
         }
         nativeHolder.isLoad = true
-        val videoOptions = VideoOptions.Builder().setStartMuted(false).setCustomControlsRequested(true).build()
+        val videoOptions = VideoOptions.Builder().setStartMuted(false).setCustomControlsRequested(false).build()
         val adOptions = NativeAdOptions.Builder()
             .setMediaAspectRatio(mediaAspectRatio)
             .setVideoOptions(videoOptions)
@@ -1710,6 +1710,40 @@ object AdmobUtils {
                     nativeHolder.native_mutable.removeObservers((activity as LifecycleOwner))
                 }
             }
+        }
+    }
+
+    fun loadAndShowNativeFullScreenNoShimmer(activity: Activity,id : String, viewGroup: ViewGroup,layout: Int,mediaAspectRatio : Int, listener: NativeFullScreenCallBack){
+        if (!isShowAds || !isNetworkConnected(activity)) {
+            viewGroup.visibility = View.GONE
+            return
+        }
+        var adMobId : String = id
+        if (isTesting) {
+            adMobId = activity.getString(R.string.test_ads_admob_native_full_screen_id)
+        }
+        val adView = activity.layoutInflater.inflate(layout, null) as NativeAdView
+        val builder = AdLoader.Builder(activity,adMobId)
+        val videoOptions = VideoOptions.Builder().setStartMuted(false).setCustomControlsRequested(false).build()
+        val adOptions = NativeAdOptions.Builder()
+            .setMediaAspectRatio(mediaAspectRatio)
+            .setVideoOptions(videoOptions)
+            .build()
+        builder.withNativeAdOptions(adOptions)
+        builder.forNativeAd { nativeAd ->
+            nativeAd.setOnPaidEventListener { adValue: AdValue? -> adValue?.let { listener.onPaidNative(adValue,id) } }
+            populateNativeAdView(nativeAd,adView.findViewById(R.id.native_ad_view))
+            viewGroup.removeAllViews()
+            viewGroup.addView(adView)
+        }
+        builder.withAdListener(object : AdListener() {
+            override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                Log.d("===AdmobFailed", loadAdError.toString())
+                listener.onLoadFailed()
+            }
+        })
+        if (adRequest != null) {
+            builder.build().loadAd(adRequest!!)
         }
     }
 }

@@ -19,12 +19,8 @@ class OtherActivity : AppCompatActivity() {
         setResult(5)
 //                AdsManager.showAdBanner(this,"",, findViewById(R.id.banner),findViewById(R.id.line));
 //        showAdBannerCollapsible(this, AdsManager.bannerHolder_other, findViewById(R.id.banner), findViewById(R.id.line))
-//        AdsManager.loadAndShowNativeFullScreen(this,binding!!.nativeAds,nativeHolder)
-        //        if (AdmodUtils.getInstance().dialog != null) {
-//            if (AdmodUtils.getInstance().dialog.isShowing()) {
-//                AdmodUtils.getInstance().dialog.dismiss();
-//            }
-//        }
+        AdsManager.loadAndShowNativeFullScreen(this,binding!!.nativeAds,nativeHolder)
+
         val ratingDialog = RatingDialog.Builder(this)
             .session(1)
             .date(1)
