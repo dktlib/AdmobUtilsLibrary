@@ -388,7 +388,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        AppOpenManager.getInstance().enableAppResumeWithActivity(MainActivity.class);
-//        AdsManager.showAdBannerCollapsible(this,AdsManager.INSTANCE.getBannerHolder(), findViewById(R.id.banner),findViewById(R.id.line));
+//        AppOpenManager.getInstance().enableAppResumeWithActivity(MainActivity.class);
+        if (!AppOpenManager.getInstance().isDismiss){
+            Log.d("==TestAOA==", "onResume: Activity");
+            AdsManager.showAdBannerCollapsible(this,AdsManager.INSTANCE.getBannerHolder(), findViewById(R.id.banner),findViewById(R.id.line));
+        }
     }
 }

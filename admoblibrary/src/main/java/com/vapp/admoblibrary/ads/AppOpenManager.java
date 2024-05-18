@@ -152,6 +152,7 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
     }
 
     boolean isLoading = false;
+    public boolean isDismiss = false;
     public void fetchAd(final boolean isSplash) {
         Log.d(TAG, "fetchAd: isSplash = " + isSplash);
         if (isAdAvailable(isSplash) || appResumeAdId == null || AppOpenManager.this.appResumeAd!= null) {
@@ -283,6 +284,12 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
                     new FullScreenContentCallback() {
                         @Override
                         public void onAdDismissedFullScreenContent() {
+                            isDismiss = true;
+                            Log.d("==TestAOA==", "onResume: true");
+                            new Handler().postDelayed(() -> {
+                                isDismiss = false;
+                                Log.d("==TestAOA==", "onResume: false");
+                            },100);
                             isLoading = false;
                             Log.d(TAG, "onAdShowedFullScreenContent: Dismiss");
                             try {

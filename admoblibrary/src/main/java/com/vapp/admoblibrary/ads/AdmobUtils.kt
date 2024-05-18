@@ -309,7 +309,11 @@ object AdmobUtils {
             viewGroup.visibility = View.GONE
             return
         }
-        banner.mAdView?.destroy()
+        try {
+            banner.mAdView?.destroy()
+        }catch (_: Exception){
+
+        }
         banner.mAdView = AdView(activity)
         if (isTesting) {
             bannerId = activity.getString(R.string.test_ads_admob_banner_collapsible_id)
