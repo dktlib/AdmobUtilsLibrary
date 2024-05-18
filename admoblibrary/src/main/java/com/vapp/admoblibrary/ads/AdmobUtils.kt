@@ -442,11 +442,11 @@ object AdmobUtils {
     @JvmStatic
     fun loadAndShowBannerCollapsibleWithConfig(
         activity: Activity,
-        id: String,refreshRateSec : Int,view: ViewGroup,
+        id: String,refreshRateSec : Int,cbFetchIntervalSec  : Int,view: ViewGroup,
         bannerAdCallback: BannerCollapsibleAdCallback
     ) {
         var bannerPlugin: BannerPlugin? = null
-        val bannerConfig = BannerPlugin.BannerConfig(id,"collapsible_bottom",refreshRateSec,0)
+        val bannerConfig = BannerPlugin.BannerConfig(id,"collapsible_bottom",refreshRateSec,cbFetchIntervalSec)
         bannerPlugin = bannerConfig.adUnitId?.let {
             BannerPlugin(
                 activity, view, it, bannerConfig, object : BannerRemoteConfig {

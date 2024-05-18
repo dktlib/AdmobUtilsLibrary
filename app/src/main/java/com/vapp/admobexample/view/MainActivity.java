@@ -388,10 +388,30 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        AppOpenManager.getInstance().enableAppResumeWithActivity(MainActivity.class);
         if (!AppOpenManager.getInstance().isDismiss){
             Log.d("==TestAOA==", "onResume: Activity");
-            AdsManager.showAdBannerCollapsible(this,AdsManager.INSTANCE.getBannerHolder(), findViewById(R.id.banner),findViewById(R.id.line));
+            AdmobUtils.loadAndShowBannerCollapsibleWithConfig(this, "", 5,10, findViewById(R.id.banner), new AdmobUtils.BannerCollapsibleAdCallback() {
+                @Override
+                public void onClickAds() {
+
+                }
+
+                @Override
+                public void onBannerAdLoaded(@NonNull AdSize adSize) {
+
+                }
+
+                @Override
+                public void onAdFail(@NonNull String message) {
+
+                }
+
+                @Override
+                public void onAdPaid(@NonNull AdValue adValue, @NonNull AdView mAdView) {
+
+                }
+            });
+//            AdsManager.showAdBannerCollapsible(this,AdsManager.INSTANCE.getBannerHolder(), findViewById(R.id.banner),findViewById(R.id.line));
         }
     }
 }
