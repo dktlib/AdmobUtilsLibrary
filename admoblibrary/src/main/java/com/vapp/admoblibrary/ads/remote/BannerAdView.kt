@@ -3,6 +3,7 @@ package com.vapp.admoblibrary.ads.remote
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -48,14 +49,18 @@ internal class BannerAdView(
     override fun loadAdInternal(onDone: () -> Unit) {
         if (!hasSetAdSize) {
             doOnLayout {
-                val adSize = getAdSize(bannerType)
-                bannerConfigHolder.mAdView?.setAdSize(adSize)
-                bannerConfigHolder.mAdView?.updateLayoutParams {
-                    width = adSize.getWidthInPixels(activity)
-                    height = adSize.getHeightInPixels(activity)
+                try {
+                    val adSize = getAdSize(bannerType)
+                    bannerConfigHolder.mAdView?.setAdSize(adSize)
+                    bannerConfigHolder.mAdView?.updateLayoutParams {
+                        width = adSize.getWidthInPixels(activity)
+                        height = adSize.getHeightInPixels(activity)
+                    }
+                    hasSetAdSize = true
+                    doLoadAd(onDone)
+                }catch (_: Exception){
+                    Log.d("==BannerConfig==", "loadAdInternal: adSize error")
                 }
-                hasSetAdSize = true
-                doLoadAd(onDone)
             }
         } else {
             doLoadAd(onDone)
