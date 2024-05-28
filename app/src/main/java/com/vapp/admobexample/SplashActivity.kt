@@ -125,7 +125,7 @@ class SplashActivity : AppCompatActivity() {
         aoaManager = AOAManager(
             this,
             "",
-            20000,false,
+            20000,
             object : AOAManager.AppOpenAdsListener {
                 override fun onAdPaid(adValue: AdValue, s: String) {
                     Toast.makeText(
@@ -141,7 +141,7 @@ class SplashActivity : AppCompatActivity() {
                 }
 
                 override fun onAdsLoaded() {
-                    aoaManager!!.showAdIfAvailable()
+//                    aoaManager!!.showAdIfAvailable()
                 }
 
                 override fun onAdsFailed(massage: String) {
@@ -150,6 +150,7 @@ class SplashActivity : AppCompatActivity() {
                         .replaceActivity(this@SplashActivity, MainActivity::class.java)
                 }
             })
+        aoaManager?.setLoadAndShow(true)
         aoaManager!!.loadAoA()
     }
 }

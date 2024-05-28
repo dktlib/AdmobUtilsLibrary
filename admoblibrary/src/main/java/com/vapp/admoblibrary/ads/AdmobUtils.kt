@@ -7,6 +7,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -143,6 +144,22 @@ object AdmobUtils {
     fun isNetworkConnected(context: Context): Boolean {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
+    }
+
+    @JvmStatic
+    private fun isNetworkAvailable(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val nw = connectivityManager.activeNetwork ?: return false
+        val actNw = connectivityManager.getNetworkCapabilities(nw) ?: return false
+        return when {
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+            //for other device how are able to connect with Ethernet
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+            //for check internet over Bluetooth
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH) -> true
+            else -> false
+        }
     }
 
     interface BannerCallBack {
@@ -1719,36 +1736,44 @@ object AdmobUtils {
     }
 
     fun loadAndShowNativeFullScreenNoShimmer(activity: Activity,id : String, viewGroup: ViewGroup,layout: Int,mediaAspectRatio : Int, listener: NativeFullScreenCallBack){
-        if (!isShowAds || !isNetworkConnected(activity)) {
-            viewGroup.visibility = View.GONE
-            return
-        }
-        var adMobId : String = id
-        if (isTesting) {
-            adMobId = activity.getString(R.string.test_ads_admob_native_full_screen_id)
-        }
-        val adView = activity.layoutInflater.inflate(layout, null) as NativeAdView
-        val builder = AdLoader.Builder(activity,adMobId)
-        val videoOptions = VideoOptions.Builder().setStartMuted(false).setCustomControlsRequested(false).build()
-        val adOptions = NativeAdOptions.Builder()
-            .setMediaAspectRatio(mediaAspectRatio)
-            .setVideoOptions(videoOptions)
-            .build()
-        builder.withNativeAdOptions(adOptions)
-        builder.forNativeAd { nativeAd ->
-            nativeAd.setOnPaidEventListener { adValue: AdValue? -> adValue?.let { listener.onPaidNative(adValue,id) } }
-            populateNativeAdView(nativeAd,adView.findViewById(R.id.native_ad_view))
-            viewGroup.removeAllViews()
-            viewGroup.addView(adView)
-        }
-        builder.withAdListener(object : AdListener() {
-            override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                Log.d("===AdmobFailed", loadAdError.toString())
+        when {
+            !isShowAds -> {
+                viewGroup.visibility = View.GONE
                 listener.onLoadFailed()
             }
-        })
-        if (adRequest != null) {
-            builder.build().loadAd(adRequest!!)
+            !isNetworkConnected(activity) -> {
+                viewGroup.visibility = View.GONE
+                listener.onLoadFailed()
+            }
+            else -> {
+                var adMobId : String = id
+                if (isTesting) {
+                    adMobId = activity.getString(R.string.test_ads_admob_native_full_screen_id)
+                }
+                val adView = activity.layoutInflater.inflate(layout, null) as NativeAdView
+                val builder = AdLoader.Builder(activity,adMobId)
+                val videoOptions = VideoOptions.Builder().setStartMuted(false).setCustomControlsRequested(false).build()
+                val adOptions = NativeAdOptions.Builder()
+                    .setMediaAspectRatio(mediaAspectRatio)
+                    .setVideoOptions(videoOptions)
+                    .build()
+                builder.withNativeAdOptions(adOptions)
+                builder.forNativeAd { nativeAd ->
+                    nativeAd.setOnPaidEventListener { adValue: AdValue? -> adValue?.let { listener.onPaidNative(adValue,id) } }
+                    populateNativeAdView(nativeAd,adView.findViewById(R.id.native_ad_view))
+                    viewGroup.removeAllViews()
+                    viewGroup.addView(adView)
+                }
+                builder.withAdListener(object : AdListener() {
+                    override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                        Log.d("===AdmobFailed", loadAdError.toString())
+                        listener.onLoadFailed()
+                    }
+                })
+                if (adRequest != null) {
+                    builder.build().loadAd(adRequest!!)
+                }
+            }
         }
     }
 }

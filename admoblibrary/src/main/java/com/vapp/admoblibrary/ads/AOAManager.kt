@@ -24,12 +24,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class AOAManager(private val activity: Activity,val appOpen: String,val timeOut: Long, val isShow : Boolean, val appOpenAdsListener: AppOpenAdsListener) {
+class AOAManager(private val activity: Activity,val appOpen: String,val timeOut: Long, val appOpenAdsListener: AppOpenAdsListener) {
     private var appOpenAd: AppOpenAd? = null
     var isShowingAd = true
     var isLoading = true
     var dialogFullScreen: Dialog? = null
     var isStart = true
+    private var isLoadAndShow = true
     private val adRequest: AdRequest
         get() = AdRequest.Builder().build()
 
@@ -83,7 +84,7 @@ class AOAManager(private val activity: Activity,val appOpen: String,val timeOut:
                     appOpenAdsListener.onAdsLoaded()
                     job.cancel()
                     Log.d("====Timeout", "isAdAvailable = true")
-                    if (!AppOpenManager.getInstance().isShowingAd && !isShowingAd && isShow){
+                    if (!AppOpenManager.getInstance().isShowingAd && !isShowingAd && isLoadAndShow){
                         showAdIfAvailable()
                     }
                 }
@@ -186,6 +187,10 @@ class AOAManager(private val activity: Activity,val appOpen: String,val timeOut:
             appOpenAd?.fullScreenContentCallback?.onAdDismissedFullScreenContent()
         } catch (ignored: Exception) {
         }
+    }
+
+    fun setLoadAndShow(loadAndShow: Boolean){
+        isLoadAndShow = loadAndShow
     }
     interface AppOpenAdsListener {
         fun onAdsClose()
