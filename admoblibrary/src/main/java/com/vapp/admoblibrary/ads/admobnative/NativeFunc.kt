@@ -206,19 +206,8 @@ class NativeFunc {
            if (nativeAd.headline != null) {
                (adView.headlineView as TextView).text = nativeAd.headline
            }
-           if (nativeAd.body == null) {
-               adView.bodyView!!.visibility = View.INVISIBLE
-           } else {
-               adView.bodyView!!.visibility = View.VISIBLE
-               (adView.bodyView as TextView).text = nativeAd.body
-           }
-//           if (nativeAd.callToAction == null) {
-//               adView.callToActionView!!.visibility = View.INVISIBLE
-//
-//           }else{
-//               adView.callToActionView!!.visibility = View.VISIBLE
+           (adView.bodyView as TextView).text = nativeAd.body
                (adView.callToActionView as Button).text = nativeAd.callToAction
-//           }
 
            if (adView.iconView != null) {
                if (nativeAd.icon == null) {
