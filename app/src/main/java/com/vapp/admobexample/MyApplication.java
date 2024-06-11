@@ -27,8 +27,7 @@ public class MyApplication extends AdmobApplication {
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
         if (level == TRIM_MEMORY_UI_HIDDEN) {
-            AppOpenManager.getInstance().isShowingAdsOnResumeBanner = true;
-            AppOpenManager.getInstance().isShowingAdsOnResume = true;
+            AppOpenManager.getInstance().setTimeToBackground(System.currentTimeMillis());
         }
     }
 }

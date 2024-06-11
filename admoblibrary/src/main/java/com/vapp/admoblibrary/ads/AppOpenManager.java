@@ -55,6 +55,8 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
     private boolean isTimeout = false;
     private static final int TIMEOUT_MSG = 11;
     private Dialog dialogFullScreen;
+    private long timeToBackground = 0;
+    private long waitingTime = 0;
     private Handler timeoutHandler = new Handler(msg -> {
         if (msg.what == TIMEOUT_MSG) {
             isTimeout = true;
@@ -68,7 +70,13 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
     public AppOpenManager() {
         disabledAppOpenList = new ArrayList<>();
     }
+    public void setWaitingTime(long waitingTime){
+        this.waitingTime = waitingTime;
+    }
 
+    public void setTimeToBackground(long timeToBackground){
+        this.timeToBackground = timeToBackground;
+    }
     public static synchronized AppOpenManager getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new AppOpenManager();
@@ -363,6 +371,9 @@ public class AppOpenManager implements Application.ActivityLifecycleCallbacks, L
             @Override
             public void run() {
                 Log.d("===Onresume", "onresume");
+                if (System.currentTimeMillis() - timeToBackground < waitingTime){
+                    return;
+                }
                 if (currentActivity == null) {
                     return;
                 }

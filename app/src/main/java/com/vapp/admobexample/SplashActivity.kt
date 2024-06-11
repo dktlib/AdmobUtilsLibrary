@@ -93,6 +93,7 @@ class SplashActivity : AppCompatActivity() {
         initAdmob(this, 10000, isDebug = true, isEnableAds = true)
         AppOpenManager.getInstance().init(application, getString(R.string.test_ads_admob_app_open_new))
         AppOpenManager.getInstance().disableAppResumeWithActivity(SplashActivity::class.java)
+        AppOpenManager.getInstance().setWaitingTime(10000)
 //        showInter()
         showAOA()
     }
