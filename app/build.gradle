@@ -54,7 +54,7 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    implementation 'com.github.dktlib:smart-app-rate:1.4.1'
+    implementation 'com.github.thienlp201097:smart-app-rate:1.0.0'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':admoblibrary')  // tên của mdule
     def multidex_version = "2.0.1"
